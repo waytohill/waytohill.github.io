@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>http://smilewayto.top/about/index.html</loc>
+    <loc>http://smilewayto.top/tags/index.html</loc>
     
     <lastmod>2022-04-26</lastmod>
     
@@ -20,7 +20,7 @@
   </url>
   
   <url>
-    <loc>http://smilewayto.top/tags/index.html</loc>
+    <loc>http://smilewayto.top/about/index.html</loc>
     
     <lastmod>2022-04-26</lastmod>
     
@@ -40,7 +40,7 @@
 
   <url>
     <loc>http://smilewayto.top/</loc>
-    <lastmod>2022-04-26</lastmod>
+    <lastmod>2022-04-27</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
