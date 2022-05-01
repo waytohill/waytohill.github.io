@@ -2,7 +2,16 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>http://smilewayto.top/about/index.html</loc>
+    <loc>http://smilewayto.top/wiki/Hexo%E6%B7%BB%E5%8A%A0%E5%88%86%E7%B1%BB%E5%92%8C%E6%A0%87%E7%AD%BE/</loc>
+    
+    <lastmod>2022-05-01</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://smilewayto.top/tags/index.html</loc>
     
     <lastmod>2022-05-01</lastmod>
     
@@ -13,16 +22,16 @@
   <url>
     <loc>http://smilewayto.top/categories/index.html</loc>
     
-    <lastmod>2022-04-26</lastmod>
+    <lastmod>2022-05-01</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>http://smilewayto.top/tags/index.html</loc>
+    <loc>http://smilewayto.top/about/index.html</loc>
     
-    <lastmod>2022-04-26</lastmod>
+    <lastmod>2022-05-01</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -46,6 +55,20 @@
   </url>
 
   
+  <url>
+    <loc>http://smilewayto.top/tags/Hexo/</loc>
+    <lastmod>2022-05-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
 
+  
+  <url>
+    <loc>http://smilewayto.top/categories/Hexo/</loc>
+    <lastmod>2022-05-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
   
 </urlset>
