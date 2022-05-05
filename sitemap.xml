@@ -2,6 +2,15 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://smilewayto.top/wiki/win10-xia-mingw-an-zhuang-yu-pei-zhi/</loc>
+    
+    <lastmod>2022-05-05</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>http://smilewayto.top/wiki/hexo-tian-jia-fen-lei-he-biao-qian/</loc>
     
     <lastmod>2022-05-01</lastmod>
@@ -49,15 +58,36 @@
 
   <url>
     <loc>http://smilewayto.top/</loc>
-    <lastmod>2022-05-02</lastmod>
+    <lastmod>2022-05-05</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
 
   
   <url>
+    <loc>http://smilewayto.top/tags/win10/</loc>
+    <lastmod>2022-05-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>http://smilewayto.top/tags/MinGW/</loc>
+    <lastmod>2022-05-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>http://smilewayto.top/tags/%E5%AE%89%E8%A3%85-%E9%85%8D%E7%BD%AE/</loc>
+    <lastmod>2022-05-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
     <loc>http://smilewayto.top/tags/Hexo/</loc>
-    <lastmod>2022-05-02</lastmod>
+    <lastmod>2022-05-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
@@ -65,8 +95,22 @@
 
   
   <url>
+    <loc>http://smilewayto.top/categories/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE%E5%8F%8A%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/</loc>
+    <lastmod>2022-05-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
     <loc>http://smilewayto.top/categories/Hexo/</loc>
-    <lastmod>2022-05-02</lastmod>
+    <lastmod>2022-05-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>http://smilewayto.top/categories/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE%E5%8F%8A%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/win10/</loc>
+    <lastmod>2022-05-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>

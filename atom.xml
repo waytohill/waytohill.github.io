@@ -6,7 +6,7 @@
   <link href="http://smilewayto.top/atom.xml" rel="self"/>
   
   <link href="http://smilewayto.top/"/>
-  <updated>2022-05-01T14:04:00.324Z</updated>
+  <updated>2022-05-05T07:51:54.474Z</updated>
   <id>http://smilewayto.top/</id>
   
   <author>
@@ -15,6 +15,34 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>win10下MinGW安装与配置</title>
+    <link href="http://smilewayto.top/wiki/win10-xia-mingw-an-zhuang-yu-pei-zhi/"/>
+    <id>http://smilewayto.top/wiki/win10-xia-mingw-an-zhuang-yu-pei-zhi/</id>
+    <published>2022-05-05T02:37:22.000Z</published>
+    <updated>2022-05-05T07:51:54.474Z</updated>
+    
+    <content type="html"><![CDATA[<p>本文记录win10系统下MinGW的安装与配置。</p><h2 id="MinGW下载与安装"><a href="#MinGW下载与安装" class="headerlink" title="MinGW下载与安装"></a>MinGW下载与安装</h2><p>1.打开网页：<a href="https://sourceforge.net/projects/mingw/">https://sourceforge.net/projects/mingw/</a> 单击Download按钮开始下载<br><img src="https://pic.imgdb.cn/item/62734ad5094754312902f278.png" alt="MinGW download"><br><span id="more"></span><br>2.下载完成后双击打开，点击install。<br><img src="https://pic.imgdb.cn/item/62734ad5094754312902f27f.png" alt="mingw-setup"><br>3.在这个界面可修改安装地址，也可使用默认地址，记住自己的安装地址，后面步骤会用到。<br><img src="https://pic.imgdb.cn/item/62734ad5094754312902f28d.png" alt="mingw-directory"><br>4.一路continue,直到安装完成，桌面上会出现如下图标(如果桌面没有可以在开始菜单中找到)，双击打开。<br><img src="https://pic.imgdb.cn/item/62734ad5094754312902f29c.png" alt="mingw-installer"><br>5.在打开后的界面中，左边栏选择Basic Setup，然后把所有选项设置为”Mark for Installation”<br><img src="https://pic.imgdb.cn/item/62734ae00947543129031050.png" alt="mingw-select"><br><strong>我在安装时，如果选中第一项和最后一项，安装时会闪退，因此最终没有安装，如果没有遇到我的情况，尽量全选。</strong><br>6.第5步中选择好后，点击右上角菜单栏的第一项”Installation”，选择”Apply Changes”进行安装，安装完后关闭界面。<br><strong>至此，MinGW安装完成，不过想要使用还需要配置一下环境变量，告诉计算机把MinGW安装到哪里了。</strong></p><h2 id="配置环境变量"><a href="#配置环境变量" class="headerlink" title="配置环境变量"></a>配置环境变量</h2><h3 id="配置环境变量。"><a href="#配置环境变量。" class="headerlink" title="配置环境变量。"></a>配置环境变量。</h3><p>在”我的电脑”右键选择属性，之后选择高级系统设置，选择环境变量，在系统变量中找到”Path”，双击打开，添加MinGW的bin文件的路径(如下图所示)。<br><img src="https://pic.imgdb.cn/item/62734ae00947543129031061.png" alt="system-variables"><br>其中，MinGW的bin文件路径就是之前安装时选择的地址。  </p><h3 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h3><p>打开cmd窗口，输入<code>g++ -v</code>或者<code>gcc -v</code>,如果出现如下图所示输出，则配置成功。<br><img src="https://pic.imgdb.cn/item/62734ae0094754312903106f.png" alt="test"><br><strong>至此，MinGW配置成功。</strong></p><h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2>]]></content>
+    
+    
+    <summary type="html">&lt;p&gt;本文记录win10系统下MinGW的安装与配置。&lt;/p&gt;
+&lt;h2 id=&quot;MinGW下载与安装&quot;&gt;&lt;a href=&quot;#MinGW下载与安装&quot; class=&quot;headerlink&quot; title=&quot;MinGW下载与安装&quot;&gt;&lt;/a&gt;MinGW下载与安装&lt;/h2&gt;&lt;p&gt;1.打开网页：&lt;a href=&quot;https://sourceforge.net/projects/mingw/&quot;&gt;https://sourceforge.net/projects/mingw/&lt;/a&gt; 单击Download按钮开始下载&lt;br&gt;&lt;img src=&quot;https://pic.imgdb.cn/item/62734ad5094754312902f278.png&quot; alt=&quot;MinGW download&quot;&gt;&lt;br&gt;</summary>
+    
+    
+    
+    <category term="环境配置及问题解决" scheme="http://smilewayto.top/categories/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE%E5%8F%8A%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/"/>
+    
+    <category term="win10" scheme="http://smilewayto.top/categories/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE%E5%8F%8A%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/win10/"/>
+    
+    
+    <category term="win10" scheme="http://smilewayto.top/tags/win10/"/>
+    
+    <category term="MinGW" scheme="http://smilewayto.top/tags/MinGW/"/>
+    
+    <category term="安装/配置" scheme="http://smilewayto.top/tags/%E5%AE%89%E8%A3%85-%E9%85%8D%E7%BD%AE/"/>
+    
+  </entry>
   
   <entry>
     <title>Hexo添加分类和标签</title>
