@@ -8,6 +8,23 @@
     <language>en-us</language>
     <lastBuildDate>Thu, 25 Aug 2022 21:30:04 +0800</lastBuildDate><atom:link href="https://waytohill.github.io/index.xml" rel="self" type="application/rss+xml" />
     <item>
+      <title>Blender Transparency Material</title>
+      <link>https://waytohill.github.io/posts/blender-transparency-material/</link>
+      <pubDate>Tue, 26 Dec 2023 14:32:46 +0800</pubDate>
+      
+      <guid>https://waytohill.github.io/posts/blender-transparency-material/</guid>
+      <description>记录一下Blender中透明材质的设置方法
+1 Eevee渲染引擎下透明材质设置方法 方法来源：Does transparency work in eevee
+Render → Screen Space Reflections - On
+Render → Screen Space Reflections → Refraction - On
+Material → Surface → Principled BSDF → Transmission - 1.000
+Material → Surface → Principled BSDF → Roughness - Adjust to your needs
+Material → Settings → Blend Mode - Opaque
+Material → Settings → Screen Space Refraction - ON
+Material → Settings → Refraction Depth - Adjust to your needs, I generally suggest 0.</description>
+    </item>
+    
+    <item>
       <title>[Lyrics]サイレントマジョリティー-欅坂46</title>
       <link>https://waytohill.github.io/posts/lyrics-silent-majority-keyakizaka46/</link>
       <pubDate>Mon, 25 Dec 2023 19:17:13 +0800</pubDate>

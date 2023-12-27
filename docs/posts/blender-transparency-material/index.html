@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en-us"><head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+   <meta name="description" content="记录一下Blender中透明材质的设置方法
+1 Eevee渲染引擎下透明材质设置方法 方法来源：Does transparency work in eevee
+Render → Screen Space Reflections - On
+Render → Screen Space Reflections → Refraction - On
+Material → Surface → Principled BSDF → Transmission - 1.000
+Material → Surface → Principled BSDF → Roughness - Adjust to your needs
+Material → Settings → Blend Mode - Opaque
+Material → Settings → Screen Space Refraction - ON
+Material → Settings → Refraction Depth - Adjust to your needs, I generally suggest 0.">  
+
+  <title>
+    
+      Blender Transparency Material
+    
+  </title>
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/" />
+  
+  
+  
+  <link rel="stylesheet" href="/css/main.10776b9b86bf7e3aca232a6c5e4fbdc3baacf45c0cc3a1802995836aa1689368e8fadebd3e46fdc9ad87eab1f834f5bbb28dbb2b23fea73ae3e57c258caef3bd.css" integrity="sha512-EHdrm4a/fjrKIypsXk&#43;9w7qs9FwMw6GAKZWDaqFok2jo&#43;t69Pkb9ya2H6rH4NPW7so27KyP&#43;pzrj5XwljK7zvQ==" />
+  
+</head>
+<body a="auto">
+        <main class="page-content" aria-label="Content">
+            <div class="w">
+<a href="/">..</a>
+
+<article>
+    <p class="post-meta">
+        <time datetime="2023-12-26 14:32:46 &#43;0800 CST">
+            2023-12-26
+        </time>
+    </p>
+
+    <h1>Blender Transparency Material</h1>
+
+    
+
+    <p>记录一下Blender中透明材质的设置方法</p>
+<h2 id="1-eevee渲染引擎下透明材质设置方法">1 Eevee渲染引擎下透明材质设置方法</h2>
+<p>方法来源：<!-- raw HTML omitted -->Does transparency work in eevee<!-- raw HTML omitted --></p>
+<ol>
+<li>
+<p><em>Render → Screen Space Reflections</em> - <em>On</em></p>
+</li>
+<li>
+<p><em>Render → Screen Space Reflections → Refraction</em> - <em>On</em></p>
+</li>
+<li>
+<p><em>Material → Surface → Principled BSDF → Transmission</em> - 1.000</p>
+</li>
+<li>
+<p><em>Material → Surface → Principled BSDF → Roughness</em> - Adjust to your needs</p>
+</li>
+<li>
+<p><em>Material → Settings → Blend Mode</em> - <em>Opaque</em></p>
+</li>
+<li>
+<p><em>Material → Settings → Screen Space Refraction</em> - <em>ON</em></p>
+</li>
+<li>
+<p><em>Material → Settings → Refraction Depth</em> - Adjust to your needs, I generally suggest 0.8 but depends on the thickness of the object.</p>
+</li>
+</ol>
+<p><strong>Result:</strong></p>
+<p><img src="https://picst.sunbangyan.cn/2023/12/27/7eda5537a1cf989fe3a9d2f81b0750e7.jpeg" alt="blender-transparency-sample"></p>
+
+</article>
+
+            </div>
+        </main>
+    </body></html>
