@@ -125,5 +125,17 @@ Yesでいいのか　サイレントマジョリティー</description>
       <description>This is my first post.</description>
     </item>
     
+    <item>
+      <title>What I have and haven&#39;t done in 2023</title>
+      <link>https://waytohill.github.io/posts/2023-review/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://waytohill.github.io/posts/2023-review/</guid>
+      <description>After two years of confusion and hesitation, I returned to campus.
+In 2023, I did nothing.
+In 2024, I hope that I can finish following list.
+Writing blogs. Learning Blender. Improving programming skills. Reading some books Losing weight. Pride hurts, modesty benefits.</description>
+    </item>
+    
   </channel>
 </rss>
