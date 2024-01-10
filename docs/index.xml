@@ -8,6 +8,34 @@
     <language>en-us</language>
     <lastBuildDate>Thu, 25 Aug 2022 21:30:04 +0800</lastBuildDate><atom:link href="https://waytohill.github.io/index.xml" rel="self" type="application/rss+xml" />
     <item>
+      <title>[OS]Windows11&#43;Arch Linux双系统安装教程</title>
+      <link>https://waytohill.github.io/posts/archlinux-install/</link>
+      <pubDate>Wed, 03 Jan 2024 13:11:58 +0800</pubDate>
+      
+      <guid>https://waytohill.github.io/posts/archlinux-install/</guid>
+      <description>记录一下在已经安装Windows11的情况下安装Arch Linux双系统的方法。
+0 前期准备 下载ISO文件，在Arch Linux下载站中找到国内的下载源下载。
+制作安装盘，推荐用Rufus进行写入，写入方式选DD，分区方案选GPT，启动方式选UEFI。
+硬盘分区，使用Windows自带的磁盘管理器，分出一块空间用来安装Arch Linux，大小根据自己的需要划分。
+EFI分区扩充，Windows默认的EFI分区大小是100M，我们想用来同时引导Windows和Arch Linux的话空间不够，因此需要进行扩充，推荐使用傲梅分区助手扩充，一般300M左右就足够了。
+BIOS相关设置，把首选启动项改成USB硬盘，如果硬盘是NVMe的，那么要把硬盘启动方式改为AHCI。进入BIOS的具体方法是在开机出现品牌logo时连击特定按键（不同品牌电脑按键不同，具体是哪个可以搜索一下）
+1 启动到archiso 把电脑关机，插入制作好的安装盘后开机，在弹出的界面选第一个(Arch Linuxinstallmedium(x86_64,UEFI))，进入archiso。
+2 连接网络 如果你连接了网线可以通过DHCP获取到IP，如果跟我一样是无线连接，就需要手动连接到WiFi，步骤如下：
+输入iwctl，进入iwd模式；
+在iwd模式下输入device list，查询网卡的名字，我的网卡名字是wlan0，因此接下来的命令可以用你的网卡名字代替wlan0；
+输入station wlan0 scan，扫描可以连接的网络；
+输入station wlan0 get-networks，列出可以连接的网络；
+输入station wlan0 connect wifiname，然后输入密码，连接WiFi，其中wifiname是你要连接的WiFi名；
+输入exit，退出iwd模式；
+输入ip a，查看是否连接成功，或者输入ping baidu.com -c 4，检查是否连接成功（出现图中结果即为联网）；
+3 设置mirrorlist 输入nano /etc/pacman.d/mirrorlist
+从下列镜像源中选一个添加到文件中，保存后关闭
+Server = https://mirrors.ustc.edu.cn/archlinux/$repo/os/$arch Server = https://mirrors.tuna.tsinghua.edu.cn/archlinux/$repo/os/$arch Server = https://mirrors.cloud.tencent.com/archlinux/$repo/os/$arch Server = https://mirrors.aliyun.com/archlinux/$repo/os/$arch 4 硬盘分区 输入lsblk，检查硬盘，此时还看不到之前划分好的空间，因为还没有建立分区，记住自己划分的空间所在磁盘的名字，进入下一步（我的是sda，/sda2是划分好的空间，图中红线部分）
+输入cfdisk /dev/sda，此处的sda根据你的磁盘名字进行替换，此时画面最后一行有一个名为“Free space”的空间，这就是在前期准备中划分好的空间
+选中“Free space”，之后选择New并单击回车进行创建分区（图来自网络） 指定要创建的分区的大小，图中空闲空间大小为3G，因此输入3G，实际可以按照你划分的大小进行输入，文件类型选择Linux filesystem（图来自网络） 最后选中Write，单击回车，输入yes后再点击回车，此时完成分区创建 选择Quit，单击回车，返回到命令行界面 输入lsblk，检查分区是否建立（图中/dev/sda2是我建立好的分区，大小是360G） 将刚才分好的区格式化为ext4格式（2.e中新建立的分区），输入mkfs.ext4 /dev/sda2进行格式化</description>
+    </item>
+    
+    <item>
       <title>What I have and haven&#39;t done in 2023</title>
       <link>https://waytohill.github.io/posts/2023-review/</link>
       <pubDate>Mon, 01 Jan 2024 12:45:15 +0800</pubDate>
