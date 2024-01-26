@@ -6,7 +6,59 @@
     <description>Recent content in Posts on waytohill site</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 03 Jan 2024 13:11:58 +0800</lastBuildDate><atom:link href="https://waytohill.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 24 Jan 2024 14:10:48 +0800</lastBuildDate><atom:link href="https://waytohill.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>[Proxy]终端配置代理的简单方法</title>
+      <link>https://waytohill.github.io/posts/terminal-proxy/</link>
+      <pubDate>Wed, 24 Jan 2024 14:10:48 +0800</pubDate>
+      
+      <guid>https://waytohill.github.io/posts/terminal-proxy/</guid>
+      <description>我们在使用终端运行git、npm时，经常因为网络问题出现连接错误，上传、下载东西尝试半天返回timeout，系统虽然可以通过设置代理的方式使用，但是由于终端并不能读取系统的配置，仍然不能使用代理。
+本文介绍可以让终端走代理的设置方法。
+Linux &amp;amp; macOS 临时设置 终端可以通过设置http_proxy和https_proxy让终端走指定的代理。
+在终端执行下面两条命令
+export http_proxy=http://127.0.0.1:7890 export https_proxy=$http_proxy 其中7890是我使用的http代理对应的端口，不能直接复制。可以在自己使用的代理软件中查看具体的端口是多少。
+以上命令只是临时生效，终端关闭后就失效了，下次打开需要重新配置。
+代理脚本 下面这个脚本提供了开关代理的两个方法。
+function proxy_on(){ export http_proxy=http://127.0.0.1:7890 export https_proxy=$http_proxy echo -e &amp;#34;proxy on.&amp;#34; } function proxy_off(){ unset http_proxy https_proxy echo -e &amp;#34;proxy off.&amp;#34; } 上述脚本可以实现终端开关代理的功能，使用proxy_on打开代理，使用proxy_off关闭代理。
+将上述脚本写入.zprofile，或者.bash_profile，或者你使用的终端对应的配置文件，在终端输入echo $SHELL查看自己使用的终端类型。
+可以使用curl -I http://www.google.com或者curl cip.cc验证是否配置成功。
+Windows cmd设置代理方法与Linux类似
+set http_proxy=http://127.0.0.1:7890 set https_proxy=http:127.0.0.1:7890 还原方法
+set http_proxy= set https_proxy= Git代理 # set proxy git config --global http.proxy &amp;#39;socks5://127.0.0.1:7890&amp;#39; git config --global https.proxy &amp;#39;socks5://127.0.0.1:7890&amp;#39; # reset proxy git config --global --unset http.</description>
+    </item>
+    
+    <item>
+      <title>[zsh]zsh&#43;oh-my-zsh安装配置</title>
+      <link>https://waytohill.github.io/posts/zsh&#43;oh-my-zsh/</link>
+      <pubDate>Tue, 23 Jan 2024 21:19:05 +0800</pubDate>
+      
+      <guid>https://waytohill.github.io/posts/zsh&#43;oh-my-zsh/</guid>
+      <description>本文介绍安装zsh和zsh的配置管理工具oh-my-zsh的方法
+安装zsh Arch Linux环境下，输入yay -S zsh进行安装
+macOS默认是有zsh的，如果没有的话输入brew install zsh安装
+更改默认终端 这一步Linux和macOS命令相同
+输入chsh -s /bin/zsh将默认终端更改为zsh
+输入echo $SHELL查看返回结果是不是zsh
+安装oh-my-zsh oh-my-zsh官方提供了两种安装方法
+sh -c &amp;#34;$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)&amp;#34; sh -c &amp;#34;$(wget https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh -O -)&amp;#34; 上面的两个安装方法因为网络问题可能很难成功，因此可以使用下面的代替，把github替换成了gitee，更容易访问，内容是一样的
+sh -c &amp;#34;$(curl -fsSL https://gitee.com/mirrors/oh-my-zsh/raw/master/tools/install.sh)&amp;#34; sh -c &amp;#34;$(wget https://gitee.com/mirrors/oh-my-zsh/raw/master/tools/install.sh -O -)&amp;#34; 如果上面的两个方法都不行，或者没有curl或wget，也可以选择手动安装
+首先输入git clone git@gitee.com:mirrors/oh-my-zsh.git,把oh-my-zsh项目clone下来，这是终端当前目录下会出现一个名为oh-my-zsh的文件夹
+之后输入sh oh-my-zsh/tools/install.sh，执行安装脚本
+安装完成后输入zsh，如果光标变成一个绿色箭头，说明安装成功了，此时的主题是oh-my-zsh的默认主题“robbyrussell”，至此zsh和oh-my-zsh就安装完毕了，此时~目录下会有一个名为.zshrc的配置文件，用来对zsh终端进行快速配置，如果没有的话可以使用cp /etc/oh-my-zsh/templates/zshrc.zsh-template ~/.zshrc复制一份模板文件到~目录下
+修改主题 输入vim .zshrc打开配置文件
+将ZSH_THEME修改为自己喜欢的主题名，我推荐ys，也可以从主题列表中找自己喜欢的用
+修改完重启终端或者输入source ~/.zshrc即可查看效果
+安装插件 这里只列出一些常用插件的安装和配置方法，需要安装其他插件可以自行搜索或者从这个插件列表中寻找
+配置方法 输入vim .zshrc打开配置文件
+将想要使用的插件名输入到plugins后面的括号中，重启或者输入source .zshrc生效，不同插件用空格或者换行隔开，不能用逗号
+常用插件 git
+这个是默认开启的，有了这个插件可以方便使用git命令的缩写
+输入cat ~/.oh-my-zsh/plugins/git/git.plugin.zsh查看可用缩写
+Z
+这个插件可以让我们很方便的实现不同目录之间的跳转，可以通过z 目录名直接跳转到曾经输入过的目录</description>
+    </item>
+    
     <item>
       <title>[OS]Windows11&#43;Arch Linux双系统安装教程</title>
       <link>https://waytohill.github.io/posts/archlinux-install/</link>
