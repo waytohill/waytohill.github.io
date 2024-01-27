@@ -2,14 +2,20 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://waytohill.github.io/posts/terminal-proxy/</loc>
-    <lastmod>2024-01-24T14:10:48+08:00</lastmod>
+    <loc>https://waytohill.github.io/posts/install-pipx/</loc>
+    <lastmod>2024-01-26T21:36:50+08:00</lastmod>
   </url><url>
     <loc>https://waytohill.github.io/posts/</loc>
+    <lastmod>2024-01-26T21:36:50+08:00</lastmod>
+  </url><url>
+    <loc>https://waytohill.github.io/posts/terminal-proxy/</loc>
     <lastmod>2024-01-24T14:10:48+08:00</lastmod>
   </url><url>
     <loc>https://waytohill.github.io/posts/zsh&#43;oh-my-zsh/</loc>
     <lastmod>2024-01-23T21:19:05+08:00</lastmod>
+  </url><url>
+    <loc>https://waytohill.github.io/posts/archlinux-simple-setting/</loc>
+    <lastmod>2024-01-21T13:47:35+08:00</lastmod>
   </url><url>
     <loc>https://waytohill.github.io/posts/archlinux-install/</loc>
     <lastmod>2024-01-03T13:11:58+08:00</lastmod>

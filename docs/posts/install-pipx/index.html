@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en-us"><head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+   <meta name="description" content="在像Ubuntu、Fedora、Arch Linux等最新的linux发行版中，运行pip(3) install会收到错误提示error: externally-managed-environment
+这是最新的发行版中为了避免系统自有的包管理工具（比如apt、pacman等）与python的包管理工具pip之间的冲突而导致的。
+为了解决这个问题，可以考虑使用pipx，这个工具会自动创建一个新的虚拟环境来安装或者运行python程序，从而避免上面的问题。
+在Arch Linux上安装pipx：sudo pacman -S pipx
+将pipx添加到PATH中：pipx ensurepath
+完成上述操作后重启终端，之后就可以使用pipx安装python包了">  
+
+  <title>
+    
+      [ArchLinux]使用pipx代替pip，解决externally-managed-environment问题
+    
+  </title>
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/" />
+  
+  
+  
+  <link rel="stylesheet" href="/css/main.10776b9b86bf7e3aca232a6c5e4fbdc3baacf45c0cc3a1802995836aa1689368e8fadebd3e46fdc9ad87eab1f834f5bbb28dbb2b23fea73ae3e57c258caef3bd.css" integrity="sha512-EHdrm4a/fjrKIypsXk&#43;9w7qs9FwMw6GAKZWDaqFok2jo&#43;t69Pkb9ya2H6rH4NPW7so27KyP&#43;pzrj5XwljK7zvQ==" />
+  
+</head>
+<body a="auto">
+        <main class="page-content" aria-label="Content">
+            <div class="w">
+<a href="/">..</a>
+
+<article>
+    <p class="post-meta">
+        <time datetime="2024-01-26 21:36:50 &#43;0800 CST">
+            2024-01-26
+        </time>
+    </p>
+
+    <h1>[ArchLinux]使用pipx代替pip，解决externally-managed-environment问题</h1>
+
+    
+
+    <p>在像Ubuntu、Fedora、Arch Linux等最新的linux发行版中，运行<code>pip(3) install</code>会收到错误提示<code>error: externally-managed-environment</code></p>
+<p>这是最新的发行版中为了避免系统自有的包管理工具（比如apt、pacman等）与python的包管理工具pip之间的冲突而导致的。</p>
+<p>为了解决这个问题，可以考虑使用pipx，这个工具会自动创建一个新的虚拟环境来安装或者运行python程序，从而避免上面的问题。</p>
+<p>在Arch Linux上安装pipx：<code>sudo pacman -S pipx</code></p>
+<p>将pipx添加到PATH中：<code>pipx ensurepath</code></p>
+<p>完成上述操作后重启终端，之后就可以使用pipx安装python包了</p>
+
+</article>
+
+            </div>
+        </main>
+    </body></html>

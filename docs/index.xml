@@ -8,6 +8,20 @@
     <language>en-us</language>
     <lastBuildDate>Thu, 25 Aug 2022 21:30:04 +0800</lastBuildDate><atom:link href="https://waytohill.github.io/index.xml" rel="self" type="application/rss+xml" />
     <item>
+      <title>[ArchLinux]使用pipx代替pip，解决externally-managed-environment问题</title>
+      <link>https://waytohill.github.io/posts/install-pipx/</link>
+      <pubDate>Fri, 26 Jan 2024 21:36:50 +0800</pubDate>
+      
+      <guid>https://waytohill.github.io/posts/install-pipx/</guid>
+      <description>在像Ubuntu、Fedora、Arch Linux等最新的linux发行版中，运行pip(3) install会收到错误提示error: externally-managed-environment
+这是最新的发行版中为了避免系统自有的包管理工具（比如apt、pacman等）与python的包管理工具pip之间的冲突而导致的。
+为了解决这个问题，可以考虑使用pipx，这个工具会自动创建一个新的虚拟环境来安装或者运行python程序，从而避免上面的问题。
+在Arch Linux上安装pipx：sudo pacman -S pipx
+将pipx添加到PATH中：pipx ensurepath
+完成上述操作后重启终端，之后就可以使用pipx安装python包了</description>
+    </item>
+    
+    <item>
       <title>[Proxy]终端配置代理的简单方法</title>
       <link>https://waytohill.github.io/posts/terminal-proxy/</link>
       <pubDate>Wed, 24 Jan 2024 14:10:48 +0800</pubDate>
@@ -57,6 +71,41 @@ sh -c &amp;#34;$(curl -fsSL https://gitee.com/mirrors/oh-my-zsh/raw/master/tools
 输入cat ~/.oh-my-zsh/plugins/git/git.plugin.zsh查看可用缩写
 Z
 这个插件可以让我们很方便的实现不同目录之间的跳转，可以通过z 目录名直接跳转到曾经输入过的目录</description>
+    </item>
+    
+    <item>
+      <title>[ArchLinux]Basic Settings for Arch Linux</title>
+      <link>https://waytohill.github.io/posts/archlinux-simple-setting/</link>
+      <pubDate>Sun, 21 Jan 2024 13:47:35 +0800</pubDate>
+      
+      <guid>https://waytohill.github.io/posts/archlinux-simple-setting/</guid>
+      <description>安装图形界面（dwm） 之前安装arch Linux系统的文章里写了怎么安装显卡驱动，这里就不再赘述，因此后续步骤默认安装了显卡驱动，如果没有安装可以先看前面的文章进行安装
+安装xorg桌面服务
+sudo pacman -S xorg xorg-server xorg-xinit
+安装dwm
+下载dwm源码
+git clone https://git.suckless.org/dwm
+编译并安装
+下载完终端当前目录会出现一个名字是dwm的文件夹，输入cd dwm进入
+在dwm文件夹下输入sudo make clean install进行安装
+配置startx
+安装完成后进行startx配置
+打开家目录下的.xinitrc文件夹，在最后一行输入exec dwm,如果还有其他exec语句记得注释掉，否则会发生错误导致无法进入图形环境
+保存并关闭文件，此时输入startx可以进入图形界面，使用shift+alt+q可以退出图形界面
+设置登录后自动进入图形环境
+打开~/.bash_profile，在文件最后一行输入：
+if [ -z &amp;#34;${DISPLAY}&amp;#34; ] &amp;amp;&amp;amp; [ &amp;#34;${XDG_VTNR}&amp;#34; -eq 1 ]; then exec startx fi 这样以后登陆之后就会自动进入图形界面。
+终端模拟器（st） 安装方法与dwm类似
+下载st源码
+git clone https://git.suckless.org/st
+编译并安装
+进入st文件夹，输入sudo make clean install进行安装
+安装好后在图形界面下，使用shift+alt+enter可以打开终端
+程序启动器（dmenu） 这个同样是suckless这个组织推出的应用，安装好这个后，只要在dwm界面下使用alt+p可以打开dmenu，之后就可以通过输入程序名字启动应用，非常方便
+这个应用可以使用pacman下载，不用像上面两个一样下载源码安装，但是想自己编译安装的朋友也可以参考上面的方法自行安装
+sudo pacman -S dmenu
+文件管理器（ranger） 终端版文件管理器
+sudo pacman -S ranger</description>
     </item>
     
     <item>
