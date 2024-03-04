@@ -1,0 +1,293 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Posts on waytohill site</title>
+    <link>https://waytohill.github.io/posts/</link>
+    <description>Recent content in Posts on waytohill site</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 04 Mar 2024 10:32:23 +0800</lastBuildDate><atom:link href="https://waytohill.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>[Leetcode][C&#43;&#43;]225.Implement Stack using Queues</title>
+      <link>https://waytohill.github.io/posts/leetcode-225/</link>
+      <pubDate>Mon, 04 Mar 2024 10:32:23 +0800</pubDate>
+      
+      <guid>https://waytohill.github.io/posts/leetcode-225/</guid>
+      <description>题目链接-用队列实现栈
+这是一道简单题，使用两个队列实现一个后入先出的栈，并支持栈的四种操作push、top、pop和empty
+具体代码如下：
+class MyStack { public: //初始化两个队列 queue&amp;lt;int&amp;gt; first; queue&amp;lt;int&amp;gt; second; MyStack() { } //实现栈的push操作（将元素压入栈顶），时间复杂度为O(n) void push(int x) { second.push(x); while(!first.empty()){ second.push(first.front()); first.pop(); } swap(first,second); } //实现栈的pop操作（移除并返回栈顶元素） int pop() { int x = first.front(); first.pop(); return x; } //实现栈的top操作（返回栈顶元素） int top() { int x=first.front(); return x; } //当两个队列都为空时，返回true bool empty() { return first.empty()&amp;amp;&amp;amp;second.empty(); } }; </description>
+    </item>
+    
+    <item>
+      <title>[ArchLinux]终端模拟器(st)配置</title>
+      <link>https://waytohill.github.io/posts/st-setting/</link>
+      <pubDate>Sun, 28 Jan 2024 19:49:20 +0800</pubDate>
+      
+      <guid>https://waytohill.github.io/posts/st-setting/</guid>
+      <description>配置st 修改config.def.h，删除config.h，输入sudo make clean install重新编译安装，之后重启st就可以查看配置后的效果了
+修改字体 字体在static char *font字段修改，修改完删除config.h重新编译安装即可
+设置shell static char *shell是st默认的shell，可以将其修改为自己喜欢的shell，修改完重新编译
+补丁-半透明背景（alpha） </description>
+    </item>
+    
+    <item>
+      <title>[ArchLinux]使用pipx代替pip，解决externally-managed-environment问题</title>
+      <link>https://waytohill.github.io/posts/install-pipx/</link>
+      <pubDate>Fri, 26 Jan 2024 21:36:50 +0800</pubDate>
+      
+      <guid>https://waytohill.github.io/posts/install-pipx/</guid>
+      <description>在像Ubuntu、Fedora、Arch Linux等最新的linux发行版中，运行pip(3) install会收到错误提示error: externally-managed-environment
+这是最新的发行版中为了避免系统自有的包管理工具（比如apt、pacman等）与python的包管理工具pip之间的冲突而导致的。
+为了解决这个问题，可以考虑使用pipx，这个工具会自动创建一个新的虚拟环境来安装或者运行python程序，从而避免上面的问题。
+在Arch Linux上安装pipx：sudo pacman -S pipx
+将pipx添加到PATH中：pipx ensurepath
+完成上述操作后重启终端，之后就可以使用pipx安装python包了</description>
+    </item>
+    
+    <item>
+      <title>[Proxy]终端配置代理的简单方法</title>
+      <link>https://waytohill.github.io/posts/terminal-proxy/</link>
+      <pubDate>Wed, 24 Jan 2024 14:10:48 +0800</pubDate>
+      
+      <guid>https://waytohill.github.io/posts/terminal-proxy/</guid>
+      <description>我们在使用终端运行git、npm时，经常因为网络问题出现连接错误，上传、下载东西尝试半天返回timeout，系统虽然可以通过设置代理的方式使用，但是由于终端并不能读取系统的配置，仍然不能使用代理。
+本文介绍可以让终端走代理的设置方法。
+Linux &amp;amp; macOS 临时设置 终端可以通过设置http_proxy和https_proxy让终端走指定的代理。
+在终端执行下面两条命令
+export http_proxy=http://127.0.0.1:7890 export https_proxy=$http_proxy 其中7890是我使用的http代理对应的端口，不能直接复制。可以在自己使用的代理软件中查看具体的端口是多少。
+以上命令只是临时生效，终端关闭后就失效了，下次打开需要重新配置。
+代理脚本 下面这个脚本提供了开关代理的两个方法。
+function proxy_on(){ export http_proxy=http://127.0.0.1:7890 export https_proxy=$http_proxy echo -e &amp;#34;proxy on.&amp;#34; } function proxy_off(){ unset http_proxy https_proxy echo -e &amp;#34;proxy off.&amp;#34; } 上述脚本可以实现终端开关代理的功能，使用proxy_on打开代理，使用proxy_off关闭代理。
+将上述脚本写入.zprofile，或者.bash_profile，或者你使用的终端对应的配置文件，在终端输入echo $SHELL查看自己使用的终端类型。
+可以使用curl -I http://www.google.com或者curl cip.cc验证是否配置成功。
+Windows cmd设置代理方法与Linux类似
+set http_proxy=http://127.0.0.1:7890 set https_proxy=http:127.0.0.1:7890 还原方法
+set http_proxy= set https_proxy= Git代理 # set proxy git config --global http.proxy &amp;#39;socks5://127.0.0.1:7890&amp;#39; git config --global https.proxy &amp;#39;socks5://127.0.0.1:7890&amp;#39; # reset proxy git config --global --unset http.</description>
+    </item>
+    
+    <item>
+      <title>[zsh]zsh&#43;oh-my-zsh安装配置</title>
+      <link>https://waytohill.github.io/posts/zsh&#43;oh-my-zsh/</link>
+      <pubDate>Tue, 23 Jan 2024 21:19:05 +0800</pubDate>
+      
+      <guid>https://waytohill.github.io/posts/zsh&#43;oh-my-zsh/</guid>
+      <description>本文介绍安装zsh和zsh的配置管理工具oh-my-zsh的方法
+安装zsh Arch Linux环境下，输入yay -S zsh进行安装
+macOS默认是有zsh的，如果没有的话输入brew install zsh安装
+更改默认终端 这一步Linux和macOS命令相同
+输入chsh -s /bin/zsh将默认终端更改为zsh
+输入echo $SHELL查看返回结果是不是zsh
+安装oh-my-zsh oh-my-zsh官方提供了两种安装方法
+sh -c &amp;#34;$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)&amp;#34; sh -c &amp;#34;$(wget https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh -O -)&amp;#34; 上面的两个安装方法因为网络问题可能很难成功，因此可以使用下面的代替，把github替换成了gitee，更容易访问，内容是一样的
+sh -c &amp;#34;$(curl -fsSL https://gitee.com/mirrors/oh-my-zsh/raw/master/tools/install.sh)&amp;#34; sh -c &amp;#34;$(wget https://gitee.com/mirrors/oh-my-zsh/raw/master/tools/install.sh -O -)&amp;#34; 如果上面的两个方法都不行，或者没有curl或wget，也可以选择手动安装
+首先输入git clone git@gitee.com:mirrors/oh-my-zsh.git,把oh-my-zsh项目clone下来，这是终端当前目录下会出现一个名为oh-my-zsh的文件夹
+之后输入sh oh-my-zsh/tools/install.sh，执行安装脚本
+安装完成后输入zsh，如果光标变成一个绿色箭头，说明安装成功了，此时的主题是oh-my-zsh的默认主题“robbyrussell”，至此zsh和oh-my-zsh就安装完毕了，此时~目录下会有一个名为.zshrc的配置文件，用来对zsh终端进行快速配置，如果没有的话可以使用cp /etc/oh-my-zsh/templates/zshrc.zsh-template ~/.zshrc复制一份模板文件到~目录下
+修改主题 输入vim .zshrc打开配置文件
+将ZSH_THEME修改为自己喜欢的主题名，我推荐ys，也可以从主题列表中找自己喜欢的用
+修改完重启终端或者输入source ~/.zshrc即可查看效果
+安装插件 这里只列出一些常用插件的安装和配置方法，需要安装其他插件可以自行搜索或者从这个插件列表中寻找
+配置方法 输入vim .zshrc打开配置文件
+将想要使用的插件名输入到plugins后面的括号中，重启或者输入source .zshrc生效，不同插件用空格或者换行隔开，不能用逗号
+常用插件 git
+这个是默认开启的，有了这个插件可以方便使用git命令的缩写
+输入cat ~/.oh-my-zsh/plugins/git/git.plugin.zsh查看可用缩写
+Z
+这个插件可以让我们很方便的实现不同目录之间的跳转，可以通过z 目录名直接跳转到曾经输入过的目录</description>
+    </item>
+    
+    <item>
+      <title>[ArchLinux]Basic Settings for Arch Linux</title>
+      <link>https://waytohill.github.io/posts/archlinux-simple-setting/</link>
+      <pubDate>Sun, 21 Jan 2024 13:47:35 +0800</pubDate>
+      
+      <guid>https://waytohill.github.io/posts/archlinux-simple-setting/</guid>
+      <description>安装图形界面（dwm） 之前安装arch Linux系统的文章里写了怎么安装显卡驱动，这里就不再赘述，因此后续步骤默认安装了显卡驱动，如果没有安装可以先看前面的文章进行安装
+安装xorg桌面服务
+sudo pacman -S xorg xorg-server xorg-xinit
+安装dwm
+下载dwm源码
+git clone https://git.suckless.org/dwm
+编译并安装
+下载完终端当前目录会出现一个名字是dwm的文件夹，输入cd dwm进入
+在dwm文件夹下输入sudo make clean install进行安装
+配置startx
+安装完成后进行startx配置
+打开家目录下的.xinitrc文件夹，在最后一行输入exec dwm,如果还有其他exec语句记得注释掉，否则会发生错误导致无法进入图形环境
+保存并关闭文件，此时输入startx可以进入图形界面，使用shift+alt+q可以退出图形界面
+设置登录后自动进入图形环境
+打开~/.bash_profile，在文件最后一行输入：
+if [ -z &amp;#34;${DISPLAY}&amp;#34; ] &amp;amp;&amp;amp; [ &amp;#34;${XDG_VTNR}&amp;#34; -eq 1 ]; then exec startx fi 这样以后登陆之后就会自动进入图形界面。
+终端模拟器（st） 安装方法与dwm类似
+下载st源码
+git clone https://git.suckless.org/st
+编译并安装
+进入st文件夹，输入sudo make clean install进行安装
+安装好后在图形界面下，使用shift+alt+enter可以打开终端
+程序启动器（dmenu） 这个同样是suckless这个组织推出的应用，安装好这个后，只要在dwm界面下使用alt+p可以打开dmenu，之后就可以通过输入程序名字启动应用，非常方便
+这个应用可以使用pacman下载，不用像上面两个一样下载源码安装，但是想自己编译安装的朋友也可以参考上面的方法自行安装
+sudo pacman -S dmenu
+文件管理器（ranger） 终端版文件管理器
+sudo pacman -S ranger</description>
+    </item>
+    
+    <item>
+      <title>[OS]Windows11&#43;Arch Linux双系统安装教程</title>
+      <link>https://waytohill.github.io/posts/archlinux-install/</link>
+      <pubDate>Wed, 03 Jan 2024 13:11:58 +0800</pubDate>
+      
+      <guid>https://waytohill.github.io/posts/archlinux-install/</guid>
+      <description>记录一下在已经安装Windows11的情况下安装Arch Linux双系统的方法。
+0 前期准备 下载ISO文件，在Arch Linux下载站中找到国内的下载源下载。
+制作安装盘，推荐用Rufus进行写入，写入方式选DD，分区方案选GPT，启动方式选UEFI。
+硬盘分区，使用Windows自带的磁盘管理器，分出一块空间用来安装Arch Linux，大小根据自己的需要划分。
+EFI分区扩充，Windows默认的EFI分区大小是100M，我们想用来同时引导Windows和Arch Linux的话空间不够，因此需要进行扩充，推荐使用傲梅分区助手扩充，一般300M左右就足够了。
+BIOS相关设置，把首选启动项改成USB硬盘，如果硬盘是NVMe的，那么要把硬盘启动方式改为AHCI。进入BIOS的具体方法是在开机出现品牌logo时连击特定按键（不同品牌电脑按键不同，具体是哪个可以搜索一下）
+1 启动到archiso 把电脑关机，插入制作好的安装盘后开机，在弹出的界面选第一个(Arch Linuxinstallmedium(x86_64,UEFI))，进入archiso。
+2 连接网络 如果你连接了网线可以通过DHCP获取到IP，如果跟我一样是无线连接，就需要手动连接到WiFi，步骤如下：
+输入iwctl，进入iwd模式；
+在iwd模式下输入device list，查询网卡的名字，我的网卡名字是wlan0，因此接下来的命令可以用你的网卡名字代替wlan0；
+输入station wlan0 scan，扫描可以连接的网络；
+输入station wlan0 get-networks，列出可以连接的网络；
+输入station wlan0 connect wifiname，然后输入密码，连接WiFi，其中wifiname是你要连接的WiFi名；
+输入exit，退出iwd模式；
+输入ip a，查看是否连接成功，或者输入ping baidu.com -c 4，检查是否连接成功（出现图中结果即为联网）；
+3 设置mirrorlist 输入nano /etc/pacman.d/mirrorlist
+从下列镜像源中选一个添加到文件中，保存后关闭
+Server = https://mirrors.ustc.edu.cn/archlinux/$repo/os/$arch Server = https://mirrors.tuna.tsinghua.edu.cn/archlinux/$repo/os/$arch Server = https://mirrors.cloud.tencent.com/archlinux/$repo/os/$arch Server = https://mirrors.aliyun.com/archlinux/$repo/os/$arch 4 硬盘分区 输入lsblk，检查硬盘，此时还看不到之前划分好的空间，因为还没有建立分区，记住自己划分的空间所在磁盘的名字，进入下一步（我的是sda，/sda2是划分好的空间，图中红线部分）
+输入cfdisk /dev/sda，此处的sda根据你的磁盘名字进行替换，此时画面最后一行有一个名为“Free space”的空间，这就是在前期准备中划分好的空间
+选中“Free space”，之后选择New并单击回车进行创建分区（图来自网络） 指定要创建的分区的大小，图中空闲空间大小为3G，因此输入3G，实际可以按照你划分的大小进行输入，文件类型选择Linux filesystem（图来自网络） 最后选中Write，单击回车，输入yes后再点击回车，此时完成分区创建 选择Quit，单击回车，返回到命令行界面 输入lsblk，检查分区是否建立（图中/dev/sda2是我建立好的分区，大小是360G） 将刚才分好的区格式化为ext4格式（2.e中新建立的分区），输入mkfs.ext4 /dev/sda2进行格式化</description>
+    </item>
+    
+    <item>
+      <title>What I have and haven&#39;t done in 2023</title>
+      <link>https://waytohill.github.io/posts/2023-review/</link>
+      <pubDate>Mon, 01 Jan 2024 12:45:15 +0800</pubDate>
+      
+      <guid>https://waytohill.github.io/posts/2023-review/</guid>
+      <description>In 2023, I did nothing.
+In 2024, I hope I can finish the following list.
+Write blogs. Learn Blender. Improve programming skills. Read some books Loss weight. Pride hurts, modesty benefits.</description>
+    </item>
+    
+    <item>
+      <title>[Blender] How to Make Transparent Materials in Blender 3D</title>
+      <link>https://waytohill.github.io/posts/blender-transparent-material/</link>
+      <pubDate>Tue, 26 Dec 2023 14:32:46 +0800</pubDate>
+      
+      <guid>https://waytohill.github.io/posts/blender-transparent-material/</guid>
+      <description>记录一下Blender中透明材质的设置方法
+1 Eevee渲染引擎下透明材质设置方法 方法来源：https://blender.stackexchange.com/questions/81851/does-transparency-work-in-eevee
+Render → Screen Space Reflections - On
+Render → Screen Space Reflections → Refraction - On
+Material → Surface → Principled BSDF → Transmission - 1.000
+Material → Surface → Principled BSDF → Roughness - Adjust to your needs
+Material → Settings → Blend Mode - Opaque
+Material → Settings → Screen Space Refraction - On
+Material → Settings → Refraction Depth - Adjust to your needs.</description>
+    </item>
+    
+    <item>
+      <title>[Lyrics]サイレントマジョリティー-欅坂46</title>
+      <link>https://waytohill.github.io/posts/lyrics-silent-majority-keyakizaka46/</link>
+      <pubDate>Mon, 25 Dec 2023 19:17:13 +0800</pubDate>
+      
+      <guid>https://waytohill.github.io/posts/lyrics-silent-majority-keyakizaka46/</guid>
+      <description>人が溢れた交差点を　どこへ行く（押し流され）
+似たような服を着て　似たような表情で
+群れの中に紛れるように　歩いてる（疑わずに）
+誰かと違うことに　何をためらうのだろう
+先行く人が振り返り　列を乱すなと
+ルールを説くけど　その目は死んでいる
+君は君らしく生きて行く自由があるんだ
+大人たちに支配されるな
+初めから　そう諦めてしまったら
+僕らは何のために　生まれたのか
+夢を見ることは時には孤独にもなるよ
+誰もいない道を進むんだ
+この世界は群れていても始まらない
+Yesでいいのか　サイレントマジョリティー
+どこかの国の大統領が　言っでいた
+声を上げない者たちは　賛成していると
+選べる事が大事なんだ　人に任せるな
+行動しなければ　Noと伝わらない
+君は君らしくやりたいことをやるだけさ
+One of Themになりさがるな
+ここにいる人の数だけ道はある
+自分の夢の方に　歩けばいい
+見栄やプライドの鎖に繋がれたような
+つまらない大人は置いて行け
+さあ未来は君たちのためにある
+Noと言いなよ　サイレントマジョリティー
+誰がの後ついて行けば　傷つかないけど
+その群れが総意だと　ひとまとめにされる
+君は君らしく生きて行く自由があるんだ
+大人たちに支配されるな
+初めからそう諦めてしまったら
+僕らは何のために　生まれたのか
+夢を見る事は時に孤独にもなるよ
+誰もいない道を進むんだ
+この世界は群れていても始まらない
+Yesでいいのか　サイレントマジョリティー</description>
+    </item>
+    
+    <item>
+      <title>[Lyrics]春擬き</title>
+      <link>https://waytohill.github.io/posts/lyrics-harumodoki/</link>
+      <pubDate>Sat, 23 Dec 2023 10:52:17 +0800</pubDate>
+      
+      <guid>https://waytohill.github.io/posts/lyrics-harumodoki/</guid>
+      <description>探しに行くんだ　そこへ
+空欄を埋め　完成した定理
+正しい筈なのに
+ひらりひら　からまわる
+未来は歪で
+僅かな亀裂から　いくらでも縒れて
+理想から逸れていくんだ
+ぬるま湯が
+すっと冷めていく音がしてた
+道を変えるのなら
+今なんで
+こんなレプリカは　いらない
+本物と呼べるものだけでいい
+探しに行くんだ　そこへ
+「でもそれは良く出来だフェアリーテイルみたい」
+答えの消えた　空欄を見つめる
+埋めた筈なのに
+どうしても　わからない
+綺麗な花は大事に育てても
+遠慮ない土足で
+簡単に踏み躙られた
+降り積もる白に
+小さな芽覆われてく
+遠い遠い春は
+雪の下
+見えないものはどうしても
+記憶から薄れてしまうんだ
+探しに行く場所さえも
+見失う僕たしは
+気付かず芽を踏む
+思い出を頼りに創ってた花はすぐ枯れた
+足元には気づかずに
+本物と呼べる場所を
+探しに行くのは　きっと
+今なんだ
+こんなレプリカはいらない
+本物と呼べるものだけでいい
+探しに行くから　君を
+「ありがとう　小さな芽　見つけてくれたこと」
+君はつぶやいた</description>
+    </item>
+    
+    <item>
+      <title>My First Post</title>
+      <link>https://waytohill.github.io/posts/my-first-post/</link>
+      <pubDate>Sun, 11 Jun 2023 22:32:49 +0800</pubDate>
+      
+      <guid>https://waytohill.github.io/posts/my-first-post/</guid>
+      <description>This is my first post.</description>
+    </item>
+    
+  </channel>
+</rss>

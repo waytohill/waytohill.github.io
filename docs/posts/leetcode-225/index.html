@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en-us"><head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+   <meta name="description" content="题目链接-用队列实现栈
+这是一道简单题，使用两个队列实现一个后入先出的栈，并支持栈的四种操作push、top、pop和empty
+具体代码如下：
+class MyStack { public: //初始化两个队列 queue&lt;int&gt; first; queue&lt;int&gt; second; MyStack() { } //实现栈的push操作（将元素压入栈顶），时间复杂度为O(n) void push(int x) { second.push(x); while(!first.empty()){ second.push(first.front()); first.pop(); } swap(first,second); } //实现栈的pop操作（移除并返回栈顶元素） int pop() { int x = first.front(); first.pop(); return x; } //实现栈的top操作（返回栈顶元素） int top() { int x=first.front(); return x; } //当两个队列都为空时，返回true bool empty() { return first.empty()&amp;&amp;second.empty(); } }; ">  
+
+  <title>
+    
+      [Leetcode][C&#43;&#43;]225.Implement Stack using Queues
+    
+  </title>
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/" />
+  
+  
+  
+  <link rel="stylesheet" href="/css/main.10776b9b86bf7e3aca232a6c5e4fbdc3baacf45c0cc3a1802995836aa1689368e8fadebd3e46fdc9ad87eab1f834f5bbb28dbb2b23fea73ae3e57c258caef3bd.css" integrity="sha512-EHdrm4a/fjrKIypsXk&#43;9w7qs9FwMw6GAKZWDaqFok2jo&#43;t69Pkb9ya2H6rH4NPW7so27KyP&#43;pzrj5XwljK7zvQ==" />
+  
+</head>
+<body a="auto">
+        <main class="page-content" aria-label="Content">
+            <div class="w">
+<a href="/">..</a>
+
+<article>
+    <p class="post-meta">
+        <time datetime="2024-03-04 10:32:23 &#43;0800 CST">
+            2024-03-04
+        </time>
+    </p>
+
+    <h1>[Leetcode][C&#43;&#43;]225.Implement Stack using Queues</h1>
+
+    
+
+    <p><a href="https://leetcode.cn/problems/implement-stack-using-queues/">题目链接-用队列实现栈</a></p>
+<p>这是一道简单题，使用两个队列实现一个后入先出的栈，并支持栈的四种操作<code>push</code>、<code>top</code>、<code>pop</code>和<code>empty</code></p>
+<p>具体代码如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">MyStack</span> {
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>  	<span style="color:#75715e">//初始化两个队列
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    queue<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> first;
+</span></span><span style="display:flex;"><span>    queue<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> second;
+</span></span><span style="display:flex;"><span>    MyStack() {
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">//实现栈的push操作（将元素压入栈顶），时间复杂度为O(n)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">push</span>(<span style="color:#66d9ef">int</span> x) {
+</span></span><span style="display:flex;"><span>        second.push(x);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">while</span>(<span style="color:#f92672">!</span>first.empty()){
+</span></span><span style="display:flex;"><span>            second.push(first.front());
+</span></span><span style="display:flex;"><span>            first.pop();
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        swap(first,second);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">//实现栈的pop操作（移除并返回栈顶元素）
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">pop</span>() {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> x <span style="color:#f92672">=</span> first.front();
+</span></span><span style="display:flex;"><span>        first.pop();
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> x;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">//实现栈的top操作（返回栈顶元素）
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">top</span>() {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> x<span style="color:#f92672">=</span>first.front();
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> x;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">//当两个队列都为空时，返回true
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">bool</span> <span style="color:#a6e22e">empty</span>() {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> first.empty()<span style="color:#f92672">&amp;&amp;</span>second.empty();
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div>
+</article>
+
+            </div>
+        </main>
+    </body></html>

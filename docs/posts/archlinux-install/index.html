@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en-us"><head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+   <meta name="description" content="记录一下在已经安装Windows11的情况下安装Arch Linux双系统的方法。
+0 前期准备 下载ISO文件，在Arch Linux下载站中找到国内的下载源下载。
+制作安装盘，推荐用Rufus进行写入，写入方式选DD，分区方案选GPT，启动方式选UEFI。
+硬盘分区，使用Windows自带的磁盘管理器，分出一块空间用来安装Arch Linux，大小根据自己的需要划分。
+EFI分区扩充，Windows默认的EFI分区大小是100M，我们想用来同时引导Windows和Arch Linux的话空间不够，因此需要进行扩充，推荐使用傲梅分区助手扩充，一般300M左右就足够了。
+BIOS相关设置，把首选启动项改成USB硬盘，如果硬盘是NVMe的，那么要把硬盘启动方式改为AHCI。进入BIOS的具体方法是在开机出现品牌logo时连击特定按键（不同品牌电脑按键不同，具体是哪个可以搜索一下）
+1 启动到archiso 把电脑关机，插入制作好的安装盘后开机，在弹出的界面选第一个(Arch Linuxinstallmedium(x86_64,UEFI))，进入archiso。
+2 连接网络 如果你连接了网线可以通过DHCP获取到IP，如果跟我一样是无线连接，就需要手动连接到WiFi，步骤如下：
+输入iwctl，进入iwd模式；
+在iwd模式下输入device list，查询网卡的名字，我的网卡名字是wlan0，因此接下来的命令可以用你的网卡名字代替wlan0；
+输入station wlan0 scan，扫描可以连接的网络；
+输入station wlan0 get-networks，列出可以连接的网络；
+输入station wlan0 connect wifiname，然后输入密码，连接WiFi，其中wifiname是你要连接的WiFi名；
+输入exit，退出iwd模式；
+输入ip a，查看是否连接成功，或者输入ping baidu.com -c 4，检查是否连接成功（出现图中结果即为联网）；
+3 设置mirrorlist 输入nano /etc/pacman.d/mirrorlist
+从下列镜像源中选一个添加到文件中，保存后关闭
+Server = https://mirrors.ustc.edu.cn/archlinux/$repo/os/$arch Server = https://mirrors.tuna.tsinghua.edu.cn/archlinux/$repo/os/$arch Server = https://mirrors.cloud.tencent.com/archlinux/$repo/os/$arch Server = https://mirrors.aliyun.com/archlinux/$repo/os/$arch 4 硬盘分区 输入lsblk，检查硬盘，此时还看不到之前划分好的空间，因为还没有建立分区，记住自己划分的空间所在磁盘的名字，进入下一步（我的是sda，/sda2是划分好的空间，图中红线部分）
+输入cfdisk /dev/sda，此处的sda根据你的磁盘名字进行替换，此时画面最后一行有一个名为“Free space”的空间，这就是在前期准备中划分好的空间
+选中“Free space”，之后选择New并单击回车进行创建分区（图来自网络） 指定要创建的分区的大小，图中空闲空间大小为3G，因此输入3G，实际可以按照你划分的大小进行输入，文件类型选择Linux filesystem（图来自网络） 最后选中Write，单击回车，输入yes后再点击回车，此时完成分区创建 选择Quit，单击回车，返回到命令行界面 输入lsblk，检查分区是否建立（图中/dev/sda2是我建立好的分区，大小是360G） 将刚才分好的区格式化为ext4格式（2.e中新建立的分区），输入mkfs.ext4 /dev/sda2进行格式化">  
+
+  <title>
+    
+      [OS]Windows11&#43;Arch Linux双系统安装教程
+    
+  </title>
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/" />
+  
+  
+  
+  <link rel="stylesheet" href="/css/main.10776b9b86bf7e3aca232a6c5e4fbdc3baacf45c0cc3a1802995836aa1689368e8fadebd3e46fdc9ad87eab1f834f5bbb28dbb2b23fea73ae3e57c258caef3bd.css" integrity="sha512-EHdrm4a/fjrKIypsXk&#43;9w7qs9FwMw6GAKZWDaqFok2jo&#43;t69Pkb9ya2H6rH4NPW7so27KyP&#43;pzrj5XwljK7zvQ==" />
+  
+</head>
+<body a="auto">
+        <main class="page-content" aria-label="Content">
+            <div class="w">
+<a href="/">..</a>
+
+<article>
+    <p class="post-meta">
+        <time datetime="2024-01-03 13:11:58 &#43;0800 CST">
+            2024-01-03
+        </time>
+    </p>
+
+    <h1>[OS]Windows11&#43;Arch Linux双系统安装教程</h1>
+
+    
+
+    <p>记录一下在已经安装Windows11的情况下安装Arch Linux双系统的方法。</p>
+<h2 id="0-前期准备">0 前期准备</h2>
+<ul>
+<li>
+<p>下载ISO文件，在<a href="https://archlinux.org/download/">Arch Linux下载站</a>中找到国内的下载源下载。</p>
+</li>
+<li>
+<p>制作安装盘，推荐用<a href="https://rufus.ie/en/">Rufus</a>进行写入，写入方式选DD，分区方案选GPT，启动方式选UEFI。</p>
+</li>
+<li>
+<p>硬盘分区，使用Windows自带的磁盘管理器，分出一块空间用来安装Arch Linux，大小根据自己的需要划分。</p>
+</li>
+<li>
+<p>EFI分区扩充，Windows默认的EFI分区大小是100M，我们想用来同时引导Windows和Arch Linux的话空间不够，因此需要进行扩充，推荐使用<a href="https://www.disktool.cn">傲梅分区助手</a>扩充，一般300M左右就足够了。</p>
+</li>
+<li>
+<p>BIOS相关设置，把首选启动项改成USB硬盘，如果硬盘是NVMe的，那么要把硬盘启动方式改为AHCI。进入BIOS的具体方法是在开机出现品牌logo时连击特定按键（不同品牌电脑按键不同，具体是哪个可以搜索一下）</p>
+</li>
+</ul>
+<h2 id="1-启动到archiso">1 启动到archiso</h2>
+<p>把电脑关机，插入制作好的安装盘后开机，在弹出的界面选第一个(Arch Linuxinstallmedium(x86_64,UEFI))，进入archiso。</p>
+<p><a href="https://imgloc.com/image/IW6ET"><img src="https://i0.imgs.ovh/2024/01/09/IW6ET.png" alt="archiso"></a></p>
+<h2 id="2-连接网络">2 连接网络</h2>
+<p>如果你连接了网线可以通过DHCP获取到IP，如果跟我一样是无线连接，就需要手动连接到WiFi，步骤如下：</p>
+<p>输入<code>iwctl</code>，进入iwd模式；</p>
+<p>在iwd模式下输入<code>device list</code>，查询网卡的名字，我的网卡名字是wlan0，因此接下来的命令可以用你的网卡名字代替wlan0；</p>
+<p>输入<code>station wlan0 scan</code>，扫描可以连接的网络；</p>
+<p>输入<code>station wlan0 get-networks</code>，列出可以连接的网络；</p>
+<p>输入<code>station wlan0 connect wifiname</code>，然后输入密码，连接WiFi，其中wifiname是你要连接的WiFi名；</p>
+<p>输入<code>exit</code>，退出iwd模式；</p>
+<p>输入<code>ip a</code>，查看是否连接成功，或者输入<code>ping baidu.com -c 4</code>，检查是否连接成功（出现图中结果即为联网）；<img src="https://i0.imgs.ovh/2024/01/10/IIJsX.png" alt="ping.png"></p>
+<h2 id="3-设置mirrorlist">3 设置mirrorlist</h2>
+<p>输入<code>nano /etc/pacman.d/mirrorlist</code></p>
+<p>从下列镜像源中选一个添加到文件中，保存后关闭</p>
+<pre tabindex="0"><code>Server = https://mirrors.ustc.edu.cn/archlinux/$repo/os/$arch
+Server = https://mirrors.tuna.tsinghua.edu.cn/archlinux/$repo/os/$arch
+Server = https://mirrors.cloud.tencent.com/archlinux/$repo/os/$arch
+Server = https://mirrors.aliyun.com/archlinux/$repo/os/$arch
+</code></pre><h2 id="4-硬盘分区">4 硬盘分区</h2>
+<ol>
+<li>
+<p>输入<code>lsblk</code>，检查硬盘，此时还看不到之前划分好的空间，因为还没有建立分区，记住自己划分的空间所在磁盘的名字，进入下一步（我的是sda，/sda2是划分好的空间，图中红线部分）</p>
+<p><img src="https://i0.imgs.ovh/2024/01/09/IWgBO.jpeg" alt="disk-name.jpeg"></p>
+</li>
+<li>
+<p>输入<code>cfdisk /dev/sda</code>，此处的sda根据你的磁盘名字进行替换，此时画面最后一行有一个名为“Free space”的空间，这就是在前期准备中划分好的空间</p>
+<ol>
+<li>选中“Free space”，之后选择New并单击回车进行创建分区（图来自网络）<img src="https://i0.imgs.ovh/2024/01/09/IWtJH.png" alt="create-new-patrition.png"></li>
+<li>指定要创建的分区的大小，图中空闲空间大小为3G，因此输入3G，实际可以按照你划分的大小进行输入，文件类型选择Linux filesystem（图来自网络）<img src="https://i0.imgs.ovh/2024/01/09/IWzfo.png" alt="patririon-size.png"></li>
+<li>最后选中Write，单击回车，输入yes后再点击回车，此时完成分区创建</li>
+<li>选择Quit，单击回车，返回到命令行界面</li>
+<li>输入<code>lsblk</code>，检查分区是否建立（图中/dev/sda2是我建立好的分区，大小是360G）<img src="https://i0.imgs.ovh/2024/01/09/IWgBO.jpeg" alt="IWgBO.jpeg"></li>
+</ol>
+</li>
+<li>
+<p>将刚才分好的区格式化为ext4格式（2.e中新建立的分区），输入<code>mkfs.ext4 /dev/sda2</code>进行格式化</p>
+</li>
+<li>
+<p>挂载分区，这里需要挂载/分区和boot分区</p>
+<ol>
+<li>先挂载/分区，输入<code>mount /dev/sda2 /mnt</code></li>
+<li>挂载EFI分区，首先输入<code>lsblk</code>查看Windows系统下EFI分区的分区号，我的是nvme0n1p1<img src="https://i0.imgs.ovh/2024/01/10/IIFmt.png" alt="EFI.png">
+<ol>
+<li>输入<code>mkdir /mnt/boot</code>，建立boot文件夹</li>
+<li>输入<code>mount /dev/nvme0n1p1 /mnt/boot</code>，挂载分区</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+<h2 id="5-安装基本系统">5 安装基本系统</h2>
+<p>完成上述过程后就可以开始安装基本系统了。</p>
+<p>输入<code>pacstrap /mnt base linux linux-firmware nano</code>进行安装。</p>
+<p>这里安装的是默认内核，如果想用linux-lts、linux-zen或者linux-hardened，请参考<a href="https://wiki.archlinux.org/title/kernel">wiki-kernel</a>介绍页进行安装。</p>
+<h2 id="6-生成fstab文件">6 生成fstab文件</h2>
+<p>fstab文件是用来存放文件系统静态信息的文件，当系统启动时，系统会自动从这个文件中读取信息，并自动将此文件中指定的文件系统挂载到指定目录。因此在这里生成fstab文件，之后系统启动时会自动挂载分区，而不需要手动挂载了。</p>
+<p>输入<code>genfstab -U /mnt &gt;&gt; /mnt/etc/fstab</code>进行生成。</p>
+<p>生成后输入<code>cat /mnt/etc/fstab</code>检查，如果输出的信息里能看到分别挂载/mnt和/boot两个分区的信息说明正常生成了。</p>
+<p><img src="https://i0.imgs.ovh/2024/01/10/IIW62.png" alt="fstab.png"></p>
+<h2 id="7-简单配置新安装的系统">7 简单配置新安装的系统</h2>
+<ol>
+<li>
+<p>输入<code>arch-chroot /mnt</code>，切换到新安装的系统</p>
+</li>
+<li>
+<p>创建swap分区（在如今大部分电脑运行内存都够用的情况下可以不建立swap分区，请按照需求选择是否建立）</p>
+<ol>
+<li>输入<code>dd if=/dev/zero of=/swapfile bs=2048 count=1048576 status=progress</code>，建立swapfile；如果之前安装的内核是linux-lts，则输入<code>fallocate -l 2GB /swapfile</code>，建立swapfile</li>
+<li>输入<code>chmod 600 /swapfile</code>，修改权限</li>
+<li>输入<code>mkswap /swapfile</code>，建立swap空间</li>
+<li>输入<code>swapon /swapfile</code>进行激活</li>
+<li>修改/etc/fstab文件
+<ol>
+<li>输入<code>nano /etc/fstab</code></li>
+<li>在文件末尾输入<code>/swapfile none swap defaults 0 0</code></li>
+<li>保存并退出</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>
+<p>输入<code>ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime</code>，设置时区；输入<code>hwclock --systohc</code>，同步硬件时钟</p>
+</li>
+<li>
+<p>设置locale</p>
+<ol>
+<li>输入<code>nano /etc/locale.gen</code>，打开文件</li>
+<li>使用<code>Ctrl-W</code>快捷键，输入<code>#en_US</code>，点击回车，找到UTF-8所在行，删除前面的#</li>
+<li>同上述操作，输入<code>#zh_CN</code>，找到UTF-8所在行，删除前面的#</li>
+<li>保存并退出</li>
+<li>输入<code>locale-gen</code>，生成locale</li>
+<li>输入<code>nano /etc/locale.conf</code>，创建locale.conf文件，并填入<code>LANG=en_US.UTF-8</code></li>
+<li>保存并退出，完成locale的设置</li>
+</ol>
+</li>
+<li>
+<p>创建并写入hostname，输入<code>nano /etc/hostname</code>，写入自己想用的hostname（我的是yukino），保存并退出</p>
+</li>
+<li>
+<p>修改hosts</p>
+<ol>
+<li>
+<p>输入<code>nano /etc/hosts</code></p>
+</li>
+<li>
+<p>写入如下内容（字段间的空白用tab输入而不是空格），其中yukino替换成上面自己写入的hostname</p>
+<pre tabindex="0"><code>127.0.0.1		localhost
+::1			localhost
+127.0.1.1		yukino.localdomain
+</code></pre></li>
+<li>
+<p>保存并退出</p>
+</li>
+</ol>
+</li>
+<li>
+<p>输入<code>passwd</code>，为root用户创建密码（linux终端输入密码时不会显示，因此输入完直接点击回车即可）</p>
+</li>
+<li>
+<p>创建启动器</p>
+<ol>
+<li>
+<p>选择grub作为启动器，安装需要的基本的包
+输入如下指令<code>pacman -S grub efibootmgr networkmanager network-manager-applet dialog wireless_tools wpa_supplicant os-prober mtools dosfstools ntfs-3g base-devel linux-headers reflector git sudo</code></p>
+<p>需要选择版本时直接点击回车选默认项即可</p>
+</li>
+<li>
+<p>安装cpu的微码文件</p>
+<ol>
+<li>如果你是intel的cpu，输入<code>pacman -S intel-ucode</code>进行安装</li>
+<li>如果你是amd的cpu，输入<code>pacman -S amd-ucode</code>进行安装</li>
+</ol>
+</li>
+<li>
+<p>启用os-prober，确保Windows启动项能被grub识别</p>
+<ol>
+<li>输入<code>nano /etc/default/grub</code></li>
+<li>在文件中输入<code>GRUB_DISABLE_OS_PROBER=false</code></li>
+<li>保存并退出文件</li>
+<li>输入<code>grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=Arch</code></li>
+<li>输入<code>grub-mkconfig -o /boot/grub/grub.cfg</code>，生成grub.cfg</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>
+<p>退出新系统并取消挂载</p>
+<ol>
+<li>至此已完成了新系统的基本安装，输入<code>exit</code>退出新系统，返回archiso</li>
+<li>输入<code>umount -a</code>，取消所有分区的挂载</li>
+<li>输入<code>reboot</code>重启进入安装好的系统，重启时拔出u盘，否则仍会回到archiso界面</li>
+</ol>
+</li>
+<li>
+<p>在登陆界面，输入root，之后输入设置好的密码，进入系统</p>
+</li>
+<li>
+<p>设置WiFi</p>
+<ol>
+<li>输入<code>systemctl enable --now NetworkManager</code>，启用网络服务</li>
+<li>输入<code>nmtui</code>，打开网络设置的图形化界面（图片来自网络）<img src="https://i0.imgs.ovh/2024/01/10/II1Fs.png" alt="II1Fs.png"></li>
+<li>选择Activate a connection，之后选择想要连接的网络，输入密码进行连接</li>
+<li>连接完成后退回到命令行界面，输入<code>ping baidu.com -c 4</code>检查是否联网</li>
+</ol>
+</li>
+<li>
+<p>创建新用户并授权，我们在日常工作中不可能一直使用root用户，因此需要创建一个新用户，并授予一定的权限，用于日常生活，这样可以防止误操作导致系统崩溃</p>
+<ol>
+<li>输入<code>useradd -m -G wheel anon</code>创建新用户，其中wheel后面是用户名，我的是anon</li>
+<li>输入<code>passwd anon</code>，为新用户设置密码</li>
+<li>给用户授权
+<ol>
+<li>输入<code>EDITOR=nano visudo</code></li>
+<li>使用快捷键<code>Ctrl-W</code>，输入<code># %wheel</code>，找到这一行，并删除前面的#</li>
+<li>保存并退出</li>
+</ol>
+</li>
+</ol>
+<p>至此完成了新用户的创建。</p>
+</li>
+<li>
+<p>安装显卡驱动</p>
+<ol>
+<li>AMD：输入<code>pacman -S xf86-video-amdgpu</code></li>
+<li>NVIDIA：输入<code>pacman -S nvidia nvidia-utils</code></li>
+</ol>
+</li>
+<li>
+<p>安装xorg。输入<code>pacman -S xorg</code>，选项直接默认即可</p>
+</li>
+<li>
+<p>添加archlinuxcn源</p>
+<ol>
+<li>
+<p>输入<code>nano /etc/pacman.conf</code></p>
+</li>
+<li>
+<p>在文件最后添加</p>
+<pre tabindex="0"><code>[archlinuxcn]
+Server = https://mirrors.tuna.tsinghua.edu.cn/archlinuxcn/$arch
+</code></pre></li>
+<li>
+<p>取消[multilib]部分的注释，然后保存并退出</p>
+</li>
+<li>
+<p>输入<code>pacman -S archlinuxcn-keyring</code>，安装archlinuxcn-keyring</p>
+</li>
+</ol>
+</li>
+</ol>
+<p>至此已经完成了Arch Linux的安装和简单配置，后续为了方便使用还可以继续安装图形化界面和常用软件，大家可以在网络上搜索安装方法，我之后也会继续更新自己配置系统的记录（大概）。</p>
+<p>另外，Arch Linux拥有所有发行版中最全面完善的使用手册：<a href="https://wiki.archlinux.org">ArchWiki</a>，因此要善用ArchWiki，遇到问题后可以先翻翻wiki有没有解决方案。Enjoy your Arch Linux！</p>
+
+</article>
+
+            </div>
+        </main>
+    </body></html>
