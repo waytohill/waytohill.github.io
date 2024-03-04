@@ -1,5 +1,0 @@
-baseURL = 'https://waytohill.github.io/'
-languageCode = 'en-us'
-title = 'waytohill site(under construction)'
-theme = "nsp"
-publishdir = "docs"
