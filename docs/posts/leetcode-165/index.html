@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en-us"><head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+   <meta name="description" content="题目链接-比较字符串
+这是一道中等难度题目，题目如下：
+给你两个版本号 version1 和 version2 ，请你比较它们。
+版本号由一个或多个修订号组成，各修订号由一个 &#39;.&#39; 连接。每个修订号由 多位数字 组成，可能包含 前导零 。每个版本号至少包含一个字符。修订号从左到右编号，下标从 0 开始，最左边的修订号下标为 0 ，下一个修订号下标为 1 ，以此类推。例如，2.5.33 和 0.1 都是有效的版本号。
+比较版本号时，请按从左到右的顺序依次比较它们的修订号。比较修订号时，只需比较 忽略任何前导零后的整数值 。也就是说，修订号 1 和修订号 001 相等 。如果版本号没有指定某个下标处的修订号，则该修订号视为 0 。例如，版本 1.0 小于版本 1.1 ，因为它们下标为 0 的修订号相同，而下标为 1 的修订号分别为 0 和 1 ，0 &lt; 1 。
+返回规则如下：
+如果 *version1* &gt; *version2* 返回 1， 如果 *version1* &lt; *version2* 返回 -1， 除此之外返回 0。 这道题目本质是一个比较大小的题目，但是用点号分隔开的不同修订号的优先级不同，因此，在比较时，可以分别比较同一优先级的修订号，如果相同再比较次优先级的修订号，如果不同则输出结果。
+根据以上思想，写出比较的代码
+具体代码如下：
+class Solution { public: int compareVersion(string version1, string version2) { int n=version1.">  
+
+  <title>
+    
+      [Leetcode][C&#43;&#43;]165.Compare Version Numbers
+    
+  </title>
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/" />
+  
+  
+  
+  <link rel="stylesheet" href="/css/main.10776b9b86bf7e3aca232a6c5e4fbdc3baacf45c0cc3a1802995836aa1689368e8fadebd3e46fdc9ad87eab1f834f5bbb28dbb2b23fea73ae3e57c258caef3bd.css" integrity="sha512-EHdrm4a/fjrKIypsXk&#43;9w7qs9FwMw6GAKZWDaqFok2jo&#43;t69Pkb9ya2H6rH4NPW7so27KyP&#43;pzrj5XwljK7zvQ==" />
+  
+</head>
+<body a="auto">
+        <main class="page-content" aria-label="Content">
+            <div class="w">
+<a href="/">..</a>
+
+<article>
+    <p class="post-meta">
+        <time datetime="2024-03-04 22:36:23 &#43;0800 CST">
+            2024-03-04
+        </time>
+    </p>
+
+    <h1>[Leetcode][C&#43;&#43;]165.Compare Version Numbers</h1>
+
+    
+
+    <p><a href="https://leetcode.cn/problems/compare-version-numbers/">题目链接-比较字符串</a></p>
+<p>这是一道中等难度题目，题目如下：</p>
+<blockquote>
+<p>给你两个版本号 <code>version1</code> 和 <code>version2</code> ，请你比较它们。</p>
+<p>版本号由一个或多个修订号组成，各修订号由一个 <code>'.'</code> 连接。每个修订号由 <strong>多位数字</strong> 组成，可能包含 <strong>前导零</strong> 。每个版本号至少包含一个字符。修订号从左到右编号，下标从 0 开始，最左边的修订号下标为 0 ，下一个修订号下标为 1 ，以此类推。例如，<code>2.5.33</code> 和 <code>0.1</code> 都是有效的版本号。</p>
+<p>比较版本号时，请按从左到右的顺序依次比较它们的修订号。比较修订号时，只需比较 <strong>忽略任何前导零后的整数值</strong> 。也就是说，修订号 <code>1</code> 和修订号 <code>001</code> <strong>相等</strong> 。如果版本号没有指定某个下标处的修订号，则该修订号视为 <code>0</code> 。例如，版本 <code>1.0</code> 小于版本 <code>1.1</code> ，因为它们下标为 <code>0</code> 的修订号相同，而下标为 <code>1</code> 的修订号分别为 <code>0</code> 和 <code>1</code> ，<code>0 &lt; 1</code> 。</p>
+<p>返回规则如下：</p>
+<ul>
+<li>如果 <code>*version1* &gt; *version2*</code> 返回 <code>1</code>，</li>
+<li>如果 <code>*version1* &lt; *version2*</code> 返回 <code>-1</code>，</li>
+<li>除此之外返回 <code>0</code>。</li>
+</ul>
+</blockquote>
+<p>这道题目本质是一个比较大小的题目，但是用点号分隔开的不同修订号的优先级不同，因此，在比较时，可以分别比较同一优先级的修订号，如果相同再比较次优先级的修订号，如果不同则输出结果。</p>
+<p>根据以上思想，写出比较的代码</p>
+<p>具体代码如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Solution</span> {
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> compareVersion(string version1, string version2) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> n<span style="color:#f92672">=</span>version1.size();
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> m<span style="color:#f92672">=</span>version2.size();
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> i<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>,j<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">while</span>(i<span style="color:#f92672">&lt;</span>n<span style="color:#f92672">||</span>j<span style="color:#f92672">&lt;</span>m){
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">int</span> x<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">for</span>(;i<span style="color:#f92672">&lt;</span>n<span style="color:#f92672">&amp;&amp;</span>version1[i]<span style="color:#f92672">!=</span><span style="color:#e6db74">&#39;.&#39;</span>;i<span style="color:#f92672">++</span>){
+</span></span><span style="display:flex;"><span>                x <span style="color:#f92672">=</span> x<span style="color:#f92672">*</span><span style="color:#ae81ff">10</span><span style="color:#f92672">-</span><span style="color:#e6db74">&#39;0&#39;</span> <span style="color:#f92672">+</span> version1[i];
+</span></span><span style="display:flex;"><span>              <span style="color:#75715e">/*
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">              当修订号特别大时，这里的x和下面version2的y有溢出的风险
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">              可以将int修改为long int来避免
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">              */</span>
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">int</span> y <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">for</span>(;j<span style="color:#f92672">&lt;</span>m<span style="color:#f92672">&amp;&amp;</span>version2[j]<span style="color:#f92672">!=</span><span style="color:#e6db74">&#39;.&#39;</span>;j<span style="color:#f92672">++</span>){
+</span></span><span style="display:flex;"><span>                y <span style="color:#f92672">=</span> y<span style="color:#f92672">*</span><span style="color:#ae81ff">10</span><span style="color:#f92672">-</span><span style="color:#e6db74">&#39;0&#39;</span> <span style="color:#f92672">+</span> version2[j];
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>            i<span style="color:#f92672">++</span>;j<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span>(x<span style="color:#f92672">!=</span>y) <span style="color:#66d9ef">return</span> x<span style="color:#f92672">&gt;</span>y<span style="color:#f92672">?</span><span style="color:#ae81ff">1</span><span style="color:#f92672">:-</span><span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div>
+</article>
+
+            </div>
+        </main>
+    </body></html>

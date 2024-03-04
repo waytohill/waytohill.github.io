@@ -8,6 +8,24 @@
     <language>en-us</language>
     <lastBuildDate>Thu, 25 Aug 2022 21:30:04 +0800</lastBuildDate><atom:link href="https://waytohill.github.io/index.xml" rel="self" type="application/rss+xml" />
     <item>
+      <title>[Leetcode][C&#43;&#43;]165.Compare Version Numbers</title>
+      <link>https://waytohill.github.io/posts/leetcode-165/</link>
+      <pubDate>Mon, 04 Mar 2024 22:36:23 +0800</pubDate>
+      
+      <guid>https://waytohill.github.io/posts/leetcode-165/</guid>
+      <description>题目链接-比较字符串
+这是一道中等难度题目，题目如下：
+给你两个版本号 version1 和 version2 ，请你比较它们。
+版本号由一个或多个修订号组成，各修订号由一个 &#39;.&#39; 连接。每个修订号由 多位数字 组成，可能包含 前导零 。每个版本号至少包含一个字符。修订号从左到右编号，下标从 0 开始，最左边的修订号下标为 0 ，下一个修订号下标为 1 ，以此类推。例如，2.5.33 和 0.1 都是有效的版本号。
+比较版本号时，请按从左到右的顺序依次比较它们的修订号。比较修订号时，只需比较 忽略任何前导零后的整数值 。也就是说，修订号 1 和修订号 001 相等 。如果版本号没有指定某个下标处的修订号，则该修订号视为 0 。例如，版本 1.0 小于版本 1.1 ，因为它们下标为 0 的修订号相同，而下标为 1 的修订号分别为 0 和 1 ，0 &amp;lt; 1 。
+返回规则如下：
+如果 *version1* &amp;gt; *version2* 返回 1， 如果 *version1* &amp;lt; *version2* 返回 -1， 除此之外返回 0。 这道题目本质是一个比较大小的题目，但是用点号分隔开的不同修订号的优先级不同，因此，在比较时，可以分别比较同一优先级的修订号，如果相同再比较次优先级的修订号，如果不同则输出结果。
+根据以上思想，写出比较的代码
+具体代码如下：
+class Solution { public: int compareVersion(string version1, string version2) { int n=version1.</description>
+    </item>
+    
+    <item>
       <title>[Leetcode][C&#43;&#43;]225.Implement Stack using Queues</title>
       <link>https://waytohill.github.io/posts/leetcode-225/</link>
       <pubDate>Mon, 04 Mar 2024 10:32:23 +0800</pubDate>
