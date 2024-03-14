@@ -6,7 +6,22 @@
     <description>Recent content in Posts on waytohill site</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 04 Mar 2024 22:36:23 +0800</lastBuildDate><atom:link href="https://waytohill.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 14 Mar 2024 22:17:53 +0800</lastBuildDate><atom:link href="https://waytohill.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Leetcode 2789</title>
+      <link>https://waytohill.github.io/posts/leetcode-2789/</link>
+      <pubDate>Thu, 14 Mar 2024 22:17:53 +0800</pubDate>
+      
+      <guid>https://waytohill.github.io/posts/leetcode-2789/</guid>
+      <description>题目链接-合并后数组中的最大元素
+这是一道中等题，主要考察对题目的理解，题目原文如下：
+​	给你一个下标从 0 开始、由正整数组成的数组 nums 。
+你可以在数组上执行下述操作 任意 次：
+选中一个同时满足 0 &amp;lt;= i &amp;lt; nums.length - 1 和 nums[i] &amp;lt;= nums[i + 1] 的整数 i 。将元素 nums[i + 1] 替换为 nums[i] + nums[i + 1] ，并从数组中删除元素 nums[i] 。 返回你可以从最终数组中获得的 最大 元素的值。
+示例 1：
+输入：nums = [2,3,7,9,3] 输出：21 解释：我们可以在数组上执行下述操作： - 选中 i = 0 ，得到数组 nums = [5,7,9,3] 。 - 选中 i = 1 ，得到数组 nums = [5,16,3] 。 - 选中 i = 0 ，得到数组 nums = [21,3] 。 最终数组中的最大元素是 21 。可以证明我们无法获得更大的元素。 示例 2：</description>
+    </item>
+    
     <item>
       <title>[Leetcode][C&#43;&#43;]165.Compare Version Numbers</title>
       <link>https://waytohill.github.io/posts/leetcode-165/</link>

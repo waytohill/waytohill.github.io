@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en-us"><head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+   <meta name="description" content="题目链接-合并后数组中的最大元素
+这是一道中等题，主要考察对题目的理解，题目原文如下：
+​	给你一个下标从 0 开始、由正整数组成的数组 nums 。
+你可以在数组上执行下述操作 任意 次：
+选中一个同时满足 0 &lt;= i &lt; nums.length - 1 和 nums[i] &lt;= nums[i &#43; 1] 的整数 i 。将元素 nums[i &#43; 1] 替换为 nums[i] &#43; nums[i &#43; 1] ，并从数组中删除元素 nums[i] 。 返回你可以从最终数组中获得的 最大 元素的值。
+示例 1：
+输入：nums = [2,3,7,9,3] 输出：21 解释：我们可以在数组上执行下述操作： - 选中 i = 0 ，得到数组 nums = [5,7,9,3] 。 - 选中 i = 1 ，得到数组 nums = [5,16,3] 。 - 选中 i = 0 ，得到数组 nums = [21,3] 。 最终数组中的最大元素是 21 。可以证明我们无法获得更大的元素。 示例 2：">  
+
+  <title>
+    
+      Leetcode 2789
+    
+  </title>
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/" />
+  
+  
+  
+  <link rel="stylesheet" href="/css/main.10776b9b86bf7e3aca232a6c5e4fbdc3baacf45c0cc3a1802995836aa1689368e8fadebd3e46fdc9ad87eab1f834f5bbb28dbb2b23fea73ae3e57c258caef3bd.css" integrity="sha512-EHdrm4a/fjrKIypsXk&#43;9w7qs9FwMw6GAKZWDaqFok2jo&#43;t69Pkb9ya2H6rH4NPW7so27KyP&#43;pzrj5XwljK7zvQ==" />
+  
+</head>
+<body a="auto">
+        <main class="page-content" aria-label="Content">
+            <div class="w">
+<a href="/">..</a>
+
+<article>
+    <p class="post-meta">
+        <time datetime="2024-03-14 22:17:53 &#43;0800 CST">
+            2024-03-14
+        </time>
+    </p>
+
+    <h1>Leetcode 2789</h1>
+
+    
+
+    <p><a href="https://leetcode.cn/problems/largest-element-in-an-array-after-merge-operations">题目链接-合并后数组中的最大元素</a></p>
+<p>这是一道中等题，主要考察对题目的理解，题目原文如下：</p>
+<blockquote>
+<p>​	给你一个下标从 <strong>0</strong> 开始、由正整数组成的数组 <code>nums</code> 。</p>
+<p>你可以在数组上执行下述操作 <strong>任意</strong> 次：</p>
+<ul>
+<li>选中一个同时满足 <code>0 &lt;= i &lt; nums.length - 1</code> 和 <code>nums[i] &lt;= nums[i + 1]</code> 的整数 <code>i</code> 。将元素 <code>nums[i + 1]</code> 替换为 <code>nums[i] + nums[i + 1]</code> ，并从数组中删除元素 <code>nums[i]</code> 。</li>
+</ul>
+<p>返回你可以从最终数组中获得的 <strong>最大</strong> 元素的值。</p>
+<p><strong>示例 1：</strong></p>
+<pre tabindex="0"><code>输入：nums = [2,3,7,9,3]
+输出：21
+解释：我们可以在数组上执行下述操作：
+- 选中 i = 0 ，得到数组 nums = [5,7,9,3] 。
+- 选中 i = 1 ，得到数组 nums = [5,16,3] 。
+- 选中 i = 0 ，得到数组 nums = [21,3] 。
+最终数组中的最大元素是 21 。可以证明我们无法获得更大的元素。
+</code></pre><p><strong>示例 2：</strong></p>
+<pre tabindex="0"><code>输入：nums = [5,3,3]
+输出：11
+解释：我们可以在数组上执行下述操作：
+- 选中 i = 1 ，得到数组 nums = [5,6] 。
+- 选中 i = 0 ，得到数组 nums = [11] 。
+最终数组中只有一个元素，即 11 。
+</code></pre></blockquote>
+<p>由题意可知，数组在合并过程中总和并不会改变。因此，要得到满足题意的最大元素的值，需要对数组进行尽可能多的合并操作。由于题目是当nums[i]&lt;=nums[i+1]时，才进行合并操作，易知，如果从前向后遍历，则能进行的合并操作数量要少于从后往前遍历，又因为合并操作次数越多最后得到的结果越大。因此需要从后往前遍历判断是否合并。</p>
+<p>具体代码如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Solution</span> {
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span> maxArrayValue(vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&amp;</span> nums) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span> sum <span style="color:#f92672">=</span> nums.back();
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i<span style="color:#f92672">=</span>nums.size()<span style="color:#f92672">-</span><span style="color:#ae81ff">2</span>;i<span style="color:#f92672">&gt;=</span><span style="color:#ae81ff">0</span>;i<span style="color:#f92672">--</span>){<span style="color:#75715e">//从后往前遍历
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            sum <span style="color:#f92672">=</span> nums[i]<span style="color:#f92672">&lt;=</span>sum<span style="color:#f92672">?</span> nums[i]<span style="color:#f92672">+</span>sum:nums[i];<span style="color:#75715e">//当满足题目要求，进行合并操作，否则sum=nums[i
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> sum;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div>
+</article>
+
+            </div>
+        </main>
+    </body></html>
