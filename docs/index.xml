@@ -8,6 +8,42 @@
     <language>en-us</language>
     <lastBuildDate>Thu, 25 Aug 2022 21:30:04 +0800</lastBuildDate><atom:link href="https://waytohill.github.io/index.xml" rel="self" type="application/rss+xml" />
     <item>
+      <title>[LATEX]Writing LaTeX documents with VSCode on Mac</title>
+      <link>https://waytohill.github.io/posts/macos-latex-vscode/</link>
+      <pubDate>Sat, 15 Jun 2024 23:37:34 +0800</pubDate>
+      
+      <guid>https://waytohill.github.io/posts/macos-latex-vscode/</guid>
+      <description>最近在写论文，感觉用word进行格式控制非常麻烦，于是以后打算使用LaTeX写。那么首先就是要配置好环境。
+以下是我参考网上教程整理记录的自己安装和配置好LaTeX环境的过程，供大家参考，同时方便以后想重新安装时可以进行快速配置。
+1 安装MacTeX MacTeX是TeX Live的Mac版本，是LaTeX的基础运行环境，提供LaTeX的编译器和TeX bin等内置命令。
+首先下载MacTeX：下载地址
+打开界面后点击MacTeX.pkg进行下载。文件大小5.7G，下载时间大概15-20min。
+下载完成后双击打开进行安装。
+安装完成后，在Terminal输入“latex -version”，如果显示版本号，说明安装成功。
+在/Application中会生成一个文件夹/TeX，可以看一下里面的pdf文件READ ME FIRST，了解LaTeX的简单使用方法。
+2 安装Skim阅读器 Skim是一个支持macOS的轻量级pdf阅读器。下载地址
+LaTeX支持使用外部pdf阅读器浏览pdf文件，所以使用能够自定义的Skim阅读器可以带来更好的体验，同时能够在VSCode中实现分屏实施浏览文章的排版和效果。
+3 安装VSCode 为了实现在VSCode中写LaTeX文件，自然需要安装VSCode。下载地址
+4 VSCode配置 4.1 安装LaTeX Workshop插件 LaTeX Workshop是VSCode中支持LaTeX语言的插件，能够实现在VSCode中进行LaTeX文件的编译、项目创建和排版浏览等功能。
+安装好后重启一下，打开一个.tex文件。此时可以看到左边栏出现了TEX扩展，点击可以进入LaTeX工作台。左下角也会出现一个“✓”或“×”，点击也可以进入工作台。
+点击“View LaTeX PDF”，可以打开右侧的预览窗口查看排版情况。
+4.2 配置LaTeX Workshop的Settings JSON文件 安装完成后需要对工作台进行相应配置，以便使用编译命令和自动编译等功能。
+“command+shift+P”，打开命令行
+输入“Open Settings(JSON)”，打开配置文件，如果没有的话可以先“Open Settings(UI)”，然后点击右上角的文件图标，打开JSON文件
+把下面的内容复制进JSON文件中，在后面添加，不要覆盖原有的内容
+// LaTeX // 不在保存的时候自动编译 &amp;#34;latex-workshop.latex.autoBuild.run&amp;#34;: &amp;#34;never&amp;#34;, // 编译工具 &amp;#34;latex-workshop.latex.tools&amp;#34;: [ { &amp;#34;name&amp;#34;: &amp;#34;xelatex&amp;#34;, &amp;#34;command&amp;#34;: &amp;#34;xelatex&amp;#34;, &amp;#34;args&amp;#34;: [ &amp;#34;-synctex=1&amp;#34;, &amp;#34;-interaction=nonstopmode&amp;#34;, &amp;#34;-file-line-error&amp;#34;, &amp;#34;-pdf&amp;#34;, &amp;#34;%DOCFILE%&amp;#34; ] }, { &amp;#34;name&amp;#34;: &amp;#34;pdflatex&amp;#34;, &amp;#34;command&amp;#34;: &amp;#34;pdflatex&amp;#34;, &amp;#34;args&amp;#34;: [ &amp;#34;-synctex=1&amp;#34;, &amp;#34;-interaction=nonstopmode&amp;#34;, &amp;#34;-file-line-error&amp;#34;, &amp;#34;%DOCFILE%&amp;#34; ] }, { &amp;#34;name&amp;#34;: &amp;#34;bibtex&amp;#34;, &amp;#34;command&amp;#34;: &amp;#34;bibtex&amp;#34;, &amp;#34;args&amp;#34;: [ &amp;#34;%DOCFILE%&amp;#34; ] } ], // 编译命令 &amp;#34;latex-workshop.</description>
+    </item>
+    
+    <item>
+      <title>[Python]Using Median Filter to Reduce data draf</title>
+      <link>https://waytohill.github.io/posts/python-data-process/</link>
+      <pubDate>Sat, 15 Jun 2024 21:09:22 +0800</pubDate>
+      
+      <guid>https://waytohill.github.io/posts/python-data-process/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>[Lyrics]迷星叫--MyGO!!!!!</title>
       <link>https://waytohill.github.io/posts/lyric-mayoiuta/</link>
       <pubDate>Mon, 01 Apr 2024 16:14:47 +0800</pubDate>

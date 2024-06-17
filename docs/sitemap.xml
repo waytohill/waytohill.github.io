@@ -2,10 +2,16 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://waytohill.github.io/posts/lyric-mayoiuta/</loc>
-    <lastmod>2024-04-01T16:14:47+08:00</lastmod>
+    <loc>https://waytohill.github.io/posts/macos-latex-vscode/</loc>
+    <lastmod>2024-06-15T23:37:34+08:00</lastmod>
   </url><url>
     <loc>https://waytohill.github.io/posts/</loc>
+    <lastmod>2024-06-15T23:37:34+08:00</lastmod>
+  </url><url>
+    <loc>https://waytohill.github.io/posts/python-data-process/</loc>
+    <lastmod>2024-06-15T21:09:22+08:00</lastmod>
+  </url><url>
+    <loc>https://waytohill.github.io/posts/lyric-mayoiuta/</loc>
     <lastmod>2024-04-01T16:14:47+08:00</lastmod>
   </url><url>
     <loc>https://waytohill.github.io/posts/blender-bend-object/</loc>
