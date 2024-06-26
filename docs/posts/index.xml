@@ -6,7 +6,25 @@
     <description>Recent content in Posts on waytohill site</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 15 Jun 2024 23:37:34 +0800</lastBuildDate><atom:link href="https://waytohill.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 26 Jun 2024 22:36:57 +0800</lastBuildDate><atom:link href="https://waytohill.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>[Python]使用Pandas获取csv文件行名和列名</title>
+      <link>https://waytohill.github.io/posts/python-get-info-from-csv/</link>
+      <pubDate>Wed, 26 Jun 2024 22:36:57 +0800</pubDate>
+      
+      <guid>https://waytohill.github.io/posts/python-get-info-from-csv/</guid>
+      <description>记录一下使用Pandas读取csv数据和获取行名/列名的方法。
+首先导入pandas
+import pandas as pd #打开文件 file = pd.read_csv(filename) 获取数据
+data = file.values 获取行名
+rownames = file.index 获取列名
+colnames = file.columns 下面用我之前写过的一个简单的例子对比说明
+原来的代码
+data = pd.read_csv(filename) xdata = data[&amp;#39;time&amp;#39;] ydata = data[&amp;#39;voltage&amp;#39;] 可以看出，上述代码中xdata是打开的csv文件中列名为time的那一列的数据，ydata则是voltage列的数据。这样写固然表示的非常清晰，但只能打开列名恰好是time和voltage的csv数据，否则便会报错，也导致如果想要处理电流数据时需要将voltage改成current，非常耽误时间，也很呆。
+修改后的代码如下
+data = pd.read_csv(filename) colnames = data.columns xdata = data[colnames[0]] ydata = data[colnames[1]] 这样写的好处是不管处理列名是什么的数据都可以正常运行和显示而不需要对代码进行额外的修改。</description>
+    </item>
+    
     <item>
       <title>[LATEX]Writing LaTeX documents with VSCode on Mac</title>
       <link>https://waytohill.github.io/posts/macos-latex-vscode/</link>
