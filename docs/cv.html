@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="zh-cn" a="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>CV - waytohill</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Noto+Sans+SC:wght@400;700&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/feather-icons"></script>
+  <script src="https://unpkg.com/phosphor-icons"></script>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: 'Inter', 'Noto Sans SC', sans-serif;
+      background: #f9f9f9;
+      color: #333;
+      transition: background 0.3s, color 0.3s;
+    }
+    body[a="dark"] {
+      background: #1e1e1e;
+      color: #eaeaea;
+    }
+    .container {
+      display: flex;
+      flex-wrap: wrap;
+      max-width: 1000px;
+      margin: auto;
+      padding: 2rem 1rem;
+    }
+    .sidebar {
+      flex: 1 1 280px;
+      padding: 1rem;
+      background: #fff;
+      border-radius: 12px;
+      margin-bottom: 1rem;
+      position: sticky;
+      top: 20px;
+      align-self: flex-start;
+      height: fit-content;
+    }
+    body[a="dark"] .sidebar,
+    body[a="dark"] .card,
+    body[a="dark"] .image-card {
+      background: #2a2a2a;
+    }
+    .main {
+      flex: 2 1 640px;
+      padding: 1rem;
+      margin-left: 1rem;
+    }
+    h1, h2 {
+      border-bottom: 2px solid #ccc;
+      padding-bottom: 0.3rem;
+    }
+    .card {
+      background: #fff;
+      border-radius: 10px;
+      padding: 1rem;
+      margin-bottom: 1rem;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    }
+    .flex-line {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+      font-size: 0.95rem;
+    }
+    .flex-line span {
+      display: inline-block;
+    }
+    ul { padding-left: 1.2rem; }
+    li { margin-bottom: 0.5rem; }
+    .info-item {
+      display: flex;
+      align-items: center;
+      margin-bottom: 0.5rem;
+    }
+    .info-item i { margin-right: 8px; }
+    .toggle-theme {
+        position: fixed;
+        top: 15px;
+        right: 20px;
+        width: 40px;
+        height: 40px;
+        border-radius: 999px;
+        background-color: #eee;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        z-index: 1000;
+        transition: background 0.3s;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+    }
+    .toggle-theme i {
+        font-size: 20px;
+        transition: transform 0.3s ease, opacity 0.3s ease;
+    }
+    
+    body[a="dark"] .toggle-theme {
+        background-color: #444;
+    }
+    .toggle-theme i.ph {
+        color: #333;
+    }
+    body[a="dark"] .toggle-theme i.ph {
+        color: #fff;
+    }
+    
+    a {
+      color: #0077cc;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+    @media (max-width: 768px) {
+      .container { flex-direction: column; }
+      .main { margin-left: 0; }
+      .sidebar { position: static; }
+    }
+    .image-card {
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      cursor: pointer;
+      transition: transform 0.2s;
+      margin-top: 1rem;
+    }
+    .image-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    .image-row .image-card {
+      flex: 1 1 calc(50% - 0.5rem); /* 每行两张图 */
+      margin-top: 0; /* 重置默认的 margin-top */
+    }
+    .image-card:hover { transform: translateY(-4px); }
+    .image-card img {
+      width: 100%;
+      display: block;
+    }
+    .image-caption {
+      padding: 0.6rem;
+      font-size: 0.95rem;
+    }
+    .lightbox {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.8);
+      justify-content: center;
+      align-items: center;
+      z-index: 2000;
+    }
+    .lightbox img {
+      max-width: 90%;
+      max-height: 90%;
+      border-radius: 10px;
+      box-shadow: 0 0 10px #000;
+    }
+    .tag {
+      display: inline-block;
+      background-color: #e0f0ff;     /* 背景色 */
+      color: #003366;                /* 字体颜色 */
+      padding: 0.2em 0.6em;          /* 内边距 */
+      border-radius: 0.8em;          /* 圆角 */
+      font-size: 0.85rem;
+      margin-right: 0.3em;           /* 标签间距 */
+      line-height: 1.6em;
+      min-height: 1.6em;
+      white-space: nowrap;
+    }
+    .grid-2x2 {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr); /* 两列等宽 */
+      gap: 1rem; /* 每个单元格间距 */
+      margin-top: 0.5rem;
+    }
+
+    .grid-item {
+      background: #f0f8ff;
+      border-radius: 8px;
+      padding: 0.75rem;
+      font-size: 0.95rem;
+
+      display: flex;              /* 新增：使用 Flexbox */
+      justify-content: center;    /* 水平居中 */
+      align-items: center;        /* 垂直居中 */
+
+      text-align: center;
+      min-height: 4rem;
+    }
+    body[a="dark"] .grid-item {
+      background: #333c44;
+      color: #f0f0f0;
+    }
+    /* 全局计数器初始化：放在 body 里一次即可 */
+    body {
+      counter-reset: sharedList;
+    }
+
+    .square-bracket-list {
+      list-style: none;
+      padding-left: 0;
+      
+    }
+
+    /* 所有 li 使用共享计数器 */
+    .square-bracket-list li {
+      counter-increment: sharedList;
+      position: relative;
+      padding-left: 2em;
+      color: #333;
+      line-height: 1.6;
+    }
+
+    /* 显示序号 [x]，并保证多行左对齐 */
+    .square-bracket-list li::before {
+      content: "[" counter(sharedList) "]";
+      position: absolute;
+      left: 0;
+      font-weight: bold;
+      width: 2em;
+      display: inline-block;
+      color: #333;
+    }
+
+    /* 暗黑模式适配 */
+    body[a="dark"] .square-bracket-list li {
+      color: #f0f0f0;
+    }
+
+    body[a="dark"] .square-bracket-list li::before {
+      color: #f0f0f0;
+    }
+
+    #back-to-top {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 40px;
+    height: 40px;
+    border-radius: 999px;
+    background-color: #eee;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 999;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+    border: none;
+    transition: background 0.3s, opacity 0.3s, transform 0.2s ease;
+    padding: 0;
+    line-height: 1;
+    display: flex;
+    user-select: none;
+    }
+
+    #back-to-top:hover {
+    transform: scale(1.15);
+    background-color: #ddd;
+    }
+
+    #back-to-top i {
+    transition: color 0.3s;
+    color: #333;
+    font-size: 22px; /* 原先20px，改大为28px */
+    line-height: 1;   /* 避免垂直空隙 */
+    user-select: none;
+    }
+
+    body[a="dark"] #back-to-top {
+    background-color: #444;
+    }
+
+    body[a="dark"] #back-to-top:hover {
+    background-color: #555;
+    }
+
+    body[a="dark"] #back-to-top i {
+    color: #fff;
+    }
+
+    /* Tooltip 样式 */
+    #back-to-top::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    bottom: 130%;
+    right: 50%;
+    transform: translateX(50%) translateY(0);
+    background: rgba(50, 50, 50, 0.9);
+    color: #fff;
+    padding: 6px 12px;
+    font-size: 0.8rem;
+    border-radius: 6px;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.25s ease, transform 0.25s ease;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    z-index: 1000;
+    user-select: none;
+    }
+
+    #back-to-top:hover::after {
+    opacity: 1;
+    transform: translateX(50%) translateY(-6px);
+    pointer-events: auto;
+    }
+
+    body[a="dark"] #back-to-top::after {
+    background: rgba(230, 230, 230, 0.95);
+    color: #111;
+    }
+
+
+  </style>
+</head>
+<body a="light">
+<div class="toggle-theme" onclick="toggleTheme()">
+  <i id="theme-icon" class="ph ph-moon"></i>
+</div>
+<button id="back-to-top" onclick="scrollToTop()" data-tooltip="返回顶部">
+  <i class="ph ph-arrow-up"></i>
+</button>
+<div class="container">
+  <div class="sidebar">
+    <h1>waytohill</h1>
+    <p><strong>硕士研究生 · 轮机工程</strong></p>
+    <br/>
+    <p><strong>研究方向：</strong><br/>微纳传感器 / 微纳能量采集</p>
+    <p><strong>外语水平：</strong><br/>CET-6</p>
+    <p><strong>联系方式：</strong><br/></strong>
+        <div class="info-item"><i data-feather="mail"></i><a href="mailto:waytohill@163.com">waytohill@163.com</a></div>
+        <div class="info-item"><i data-feather="smartphone"></i>15665865215</div>
+    </p>
+    
+    
+    
+  </div>
+  <div class="main">
+    <h2>教育经历</h2>
+    <div class="card">
+      <p class="flex-line">
+        <span><strong>大连海事大学 </strong><span class="tag">211</span><span class="tag">双一流</span></span>
+        <span>2023.07 - 2026.06</span>
+      </p>
+      <p class="flex-line">
+        <span>轮机工程 硕士 轮机工程学院</span>
+        <span>均分: 89.67 / GPA: 3.90</span>
+      </p>
+      <p>主修课程：数值分析、高等工程热力学、现代控制理论、Ansys Fluent应用、船舶新能源技术、污染防控技术、硕士英语等</p>
+    </div>
+    <div class="card">
+      <p class="flex-line">
+        <span><strong>山东大学 </strong><span class="tag">985</span><span class="tag">211</span><span class="tag">双一流</span></span>
+        <span>2017.09 - 2021.06</span>
+      </p>
+      <p class="flex-line">
+        <span>数字媒体技术 学士 软件工程学院</span>
+        <span>均分: 80.58 / GPA: 3.95</span>
+      </p>
+      <p>主修课程：高级程序设计语言、数学建模、数据结构、计算机图形学、Web技术、机器学习、计算机组成原理、单片机原理及应用、计算机网络、人机交互技术、数字图像处理、最优化方法、算法设计与分析等</p>
+    </div>
+
+    <h2>荣誉奖项</h2>
+    <div class="card">
+        <div class="grid-2x2">
+            <div class="grid-item">大连海事大学轮机工程学院学业奖学金一等奖</div>
+            <div class="grid-item">ICAN国际创新创业大赛省级二等奖</div>
+            <div class="grid-item">中国(国际)传感器创新创业大赛省级三等奖</div>
+            <div class="grid-item">CCF计算机软件能力认证200分(前14.32%)</div>
+        </div>
+    </div>
+
+    <h2>专业技能</h2>
+    <div class="card">
+        <p><strong>专业软件：</strong>Comsol、LTspice、Origin、LabVIEW、Blender、Photoshop</p>
+        <p><strong>编程语言：</strong>C/C++、Python</p>
+    </div>
+
+    <h2>代表论文</h2>
+    <h3>第一作者</h3>
+    <div class="card">
+      <ol class="square-bracket-list">
+        <li><strong>Ma Z</strong>, Liu C, Lei K, et al. Triboelectric-Thermoelectric Nanogenerators Co-Design Strategy: A Self-Powered Sensing Method for Transmission Line Vibration Detection[J]. <i>Advanced Materials Technologies</i>, 2025,e00483.<strong>(IF=6.2, JCR: Q2, 中科院3区)</strong></li>
+        <li><strong>Ma Z</strong>, Liu C, Wang Y, et al. A Hybrid Harvesting Method for Multiple Marine Renewable Energy Sources Based on Microthermoelectric Generator and Triboelectric Nanogenerator[J]. <i>Advanced Engineering Materials</i>,2024,26(22):2401486-2401486.<strong>(IF=3.3, JCR: Q2, 中科院3区)</strong></li>
+        <li>Hao Z, <strong>Ma Z</strong>, Liu C, et al. A joint sensing method for transmission line damage and sag based on triboelectric nanogenerator and deep learning[J]. <i>Journal of Materials Science: Materials in Electronics</i>,2024, 36, 733.<strong>(IF=2.8, JCR: Q2, 中科院4区, 共同一作)</strong></li>
+      </ol>
+      <div class="image-row">
+        <div class="image-card"><img src="./img/paper1TOC.png" alt="论文1图文摘要" onclick="showLightbox(this)"><div class="image-caption">论文1图文摘要<sup>[1]</sup></div></div>
+        <div class="image-card"><img src="./img/paper2TOC.png" alt="论文2图文摘要" onclick="showLightbox(this)"><div class="image-caption">论文2图文摘要<sup>[2]</sup></div></div>
+        <div class="image-card"><img src="./img/paper3TOC.jpg" alt="论文3图文摘要" onclick="showLightbox(this)"><div class="image-caption">论文3图文摘要<sup>[3]</sup></div></div>
+      </div>
+      
+    </div>
+    <h3>学生二作</h3>
+    <div class="card">
+      <ol class="square-bracket-list">
+        <li>Hao Z, Liu C, <strong>Ma Z</strong>, et al. A Multi-Dimensional Sensing Method for Icing Thickness, Icing Shape, and Sag of Transmission Lines Based on Triboelectric Nanogenerator[J]. <i>Advanced Materials Technologies</i>, 2025, 10, 2401916.<strong>(IF=6.2, JCR: Q2, 中科院3区)</strong></li>
+        <li>Liu C, Shao T, <strong>Ma Z</strong>, et al. Human Energy Harvesting – A Flexible Bionic Composite MTEG-TENG Based on the Shared Substrate with Characteristic Doping[J]. <i>Advanced Sustainable Systems</i>, 2025, 9, 2500116.<strong>(IF=6.1, JCR: Q2, 中科院3区)</strong></li>
+        <li>Wang Y, Liu C, <strong>Ma Z</strong>, et al. A novel underwater multi-dimensional tactile and flow velocity perception method based on micro thermoelectric generator[J]. <i>Flow Measurement and Instrumentation</i>, 2025, 106102955-102955.<strong>(IF=2.7, JCR: Q2, 中科院3区)</strong></li>
+      </ol>
+    </div>
+    <h3>其余顺序论文</h3>
+    <div class="card">
+      <ol class="square-bracket-list">
+        <li>Liu C, Wang Y, Lu Y, Hao Z, <strong>Ma Z</strong>, et al. A Self-Powered Two-Dimensional Acceleration Sensing Method Based on Triboelectric Nanogenerators for Power Transmission Lines[J]. <i>ACS Applied Electronic Materials</i>, 2025;7(6):2362-72.</li>
+        <li>Feng X, Hao Z, Shao T, <strong>Ma Z</strong>, et al. A hybrid energy harvesting approach for transmission lines based on triboelectric nanogenerator and micro thermoelectric generator[J]. <i>Nanotechnology</i>, 2024;35(34):345401.</li>
+        <li>Hao Z, Liu C, Shao T, <strong>Ma Z</strong>, et al. Self‐Powered Vibration Frequency Monitoring Device for the Grid Based on Triboelectric Nanogenerator and Micro Thermoelectric Generator[J]. <i>Advanced Sustainable Systems</i>, 2024;8(7):2300561.</li>
+        <li>Liu C, Shao T, Hao Z, Sui Z, <strong>Ma Z</strong>, et al. Hybrid human energy harvesting method of MTEG-TENG based on a flexible shared substrate[J]. <i>Materials Today Sustainability</i>, 2024;26:100692.</li>
+      </ol>
+    </div>
+
+    <h2>授权专利</h2>
+    <div class="card">
+      <p><strong>一种复合材料碳纤维芯棒X射线图像缺陷提取方法及系统(已授权)</strong></p>
+      <p class="flex-line"><span>发明专利</span><span>第二发明人/学生第一发明人</span></p>
+      <p class="flex-line"><span>申请号：CN202110769321.8</span><span>授权号：CN113592782B</span></p>
+      <p><strong>摘要：</strong>本发明提供了一种复合材料碳纤维芯棒X射线图像缺陷提取方法及系统,基于二维经验模态分解和形态学方法,实现了X射线图像的缺陷特征快速提取和准确标注。</p>
+      <div class="image-card"><img src="./img/patent.png" alt="发明专利证书" onclick="showLightbox(this)"><div class="image-caption">发明专利证书</div></div>
+    </div>
+
+    <h2>科研/项目经历</h2>
+    <h3>横向项目</h3>
+    <div class="card">
+        <h3>输电线路柔性微传感技术研究及应用(南方电网)</h3>
+        <p><strong>研究内容：</strong>多频振动场景下摩擦纳米发电机(Triboelectric nanogenerator, TENG)机电耦合模型研究；微型温差发电机(Micro Thermoelectric generator, MTEG)在复杂温变环境中的热电转换技术研究；温-振协同感知与输电线路故障预警模型研究。</p>
+        <p><strong>创新点：</strong>提出TENG-MTEG协同感知架构，实现输电线路振动/温度双模态监测；建立多参数耦合故障预警模型，支持早期隐患识别。</p>
+        <p><strong>负责内容：</strong>项目可行性研究与整体方案撰写，实验台搭建，样机研制与性能测试，项目所需论文撰写等工作。</p>
+        <p><strong>研究成果：</strong>发表SCI二区论文4篇<sup>[1,3,4,7]</sup>。</p>
+        <div class="image-row">
+        <div class="image-card"><img src="./img/pcb-detail.jpg" alt="信号收发单元设计图" onclick="showLightbox(this)"><div class="image-caption">信号接收、发送单元设计图</div></div>
+        <div class="image-card"><img src="./img/temp-sensor.png" alt="输电线路温度监测实验图" onclick="showLightbox(this)"><div class="image-caption">输电线路温度监测实验图</div></div>
+        </div>
+    </div>
+    <div class="card">
+        <h3>亲水性带电激光除冰装置关键技术研究及应用(南方电网)</h3>
+        <p><strong>研究内容：</strong>冰层与绝缘子对不同波长激光的吸收特性研究；水共振吸收型激光除冰发生器研究；激光带电除冰装置研制；现场示范应用。</p>
+        <p><strong>创新点：</strong>首创水共振吸收型激光除冰发生器，降低绝缘子热灼伤风险；开发标准化激光带电除冰操作流程，提升作业安全性与效率。</p>
+        <p><strong>负责内容：</strong>除冰装置研制与调试，标准化除冰作业流程制定，项目出差，多次赴现场开展示范应用与验收，撰写项目结题报告书等工作。</p>
+        <p><strong>研究成果：</strong>形成标准化除冰作业操作流程，完成现场工程验证。</p>
+        <div class="image-row">
+        <div class="image-card"><img src="./img/device1.jpg" alt="亲水性带电激光除冰装置实拍图" onclick="showLightbox(this)"><div class="image-caption">亲水性带电激光除冰装置实拍图</div></div>
+        <div class="image-card"><img src="./img/yanshou.jpg" alt="绝缘子除冰现场验收图片" onclick="showLightbox(this)"><div class="image-caption">绝缘子除冰现场验收实拍图</div></div>
+        </div>
+    </div>
+    <h3>纵向项目</h3>
+    <div class="card">
+        <h3>发电网络构建及海洋动力系统环境测试(国家重点研发课题)</h3>
+        <p><strong>研究内容：</strong>水波能纳米发电装置水动力建模与优化；纳米发电阵列优化研究；海洋环境适应性纳米发电网络设计；系统测试与性能验证。</p>
+        <p><strong>创新点：</strong>提出拓扑结构优化方法，提升阵列发电效能与抗干扰能力；开发模块化防护技术，增强设备海洋环境适应性。</p>
+        <p><strong>负责内容：</strong>原理样机设计、研制及测试，项目所需论文撰写等工作。</p>
+        <p><strong>研究成果：</strong>发表SCI二区论文1篇<sup>[2]</sup>。</p>
+        <div class="image-row">
+        <div class="image-card"><img src="./img/teng1.png" alt="MTEG-TENG复合能量采集系统生物实验" onclick="showLightbox(this)"><div class="image-caption">MTEG-TENG复合能量采集系统生物实验图</div></div>
+        <div class="image-card"><img src="./img/teng2.png" alt="MTEG-TENG复合能量采集单元图" onclick="showLightbox(this)"><div class="image-caption">MTEG-TENG复合能量采集单元图</div></div>
+        </div>
+    </div>
+    <h3>个人/开源项目</h3>
+    <div class="card">
+        <h3>基于Python的信号处理与可视化工具开发</h3>
+        <p><strong>研究内容：</strong>开发全流程信号处理工具链，支持数据导入、预处理（基线校正、去噪滤波）、多维度时频分析（FFT/STFT/CWT）及可视化；集成NI-DAQmx接口，实现与硬件设备的实时数据采集与在线分析，推动实验自动化；采用模块化设计（Tkinter图形界面 + NumPy/SciPy算法核心），支持参数动态调整与结果实时交互。</p>
+        <p><strong>创新点：</strong>替代传统LabVIEW平台，提升跨平台兼容性与开发灵活性；支持高度定制的数据处理流程与参数调整，并实现各阶段结果可视化，为信号处理提供实时反馈。</p>
+        <p><strong>负责内容：</strong>系统架构设计与核心算法开发；图形界面实现与软硬件通信调试；使用文档撰写与实验室推广。</p>
+        <p><strong>技术栈：</strong>Python (Tkinter, NumPy, SciPy, Matplotlib等), 数字信号处理(DSP), NI-DAQmx, Git</p>
+        <p><strong>研究成果：</strong>工具已开源并在课题组内进行推广，显著提升了科研效率。目前该工具已经应用于三篇SCI论文的数据分析与处理工作<sup>[1,3,5]</sup>。</p>
+        <p><strong>Github开源地址：</strong><a href="https://github.com/waytohill/TENG-data-processor" target="_blank" rel="noopener noreferrer">https://github.com/waytohill/TENG-data-processor</a></p>
+        <div class="image-row">
+        <div class="image-card"><img src="./img/dataprocess.png" alt="导入CSV进行数据处理" onclick="showLightbox(this)"><div class="image-caption">导入CSV进行数据处理示意图</div></div>
+        <div class="image-card"><img src="./img/real-time-detect.jpg" alt="实时采集数据并计算频率" onclick="showLightbox(this)"><div class="image-caption">实时采集数据并计算频率示意图</div></div>
+        </div>
+    </div>
+
+    <h2>参与项目申请</h2>
+    <div class="card">
+        <ul>
+            <li><strong>国自然 小温差海洋条件下的MTEG-TENG流-机-热-电转换机理研究</strong></li>
+            <li><strong>南方电网 德宏供电局 | 输电线路柔性微传感技术研究及应用</strong></li>
+            <li><strong>南方电网 昆明供电局 | 非接触远距离新型传感技术研究及装备试制</strong></li>
+            <li><strong>南方电网 红河供电局 | 带电作业试验研究及设备试制</strong></li>
+            <li><strong>南方电网 云南电科院 | 输电线路涉害鸟群动态监测技术研究及鸟害综合评估预警系统试制</strong></li>
+        </ul>
+    </div>
+    
+  </div>
+</div>
+<div class="lightbox" onclick="hideLightbox()">
+  <img id="lightbox-img" src="" alt="preview">
+</div>
+<script>
+  feather.replace();
+  function toggleTheme() {
+    const body = document.body;
+    const isDark = body.getAttribute("a") === "dark";
+    body.setAttribute("a", isDark ? "light" : "dark");
+
+    const icon = document.getElementById("theme-icon");
+    icon.style.opacity = '0';
+    setTimeout(() => {
+        icon.className = isDark ? "ph ph-moon" : "ph ph-sun";
+        icon.style.opacity = '1';
+    }, 150);
+  }
+
+  function showLightbox(img) {
+    const lightbox = document.querySelector('.lightbox');
+    const lightboxImg = document.getElementById('lightbox-img');
+    lightboxImg.src = img.src;
+    lightbox.style.display = 'flex';
+  }
+  function hideLightbox() {
+    document.querySelector('.lightbox').style.display = 'none';
+  }
+
+  // 回到顶部按钮逻辑
+    const backToTopBtn = document.getElementById("back-to-top");
+
+    window.addEventListener("scroll", () => {
+    if (window.scrollY > 100) {
+        backToTopBtn.style.display = "flex";
+    } else {
+        backToTopBtn.style.display = "none";
+    }
+    });
+
+    function scrollToTop() {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+</script>
+</body>
+</html>
