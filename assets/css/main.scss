@@ -2,28 +2,3 @@
 ---
 
 @import "no-style-please";
-
-/* =========================
-   Chinese font: LXGW WenKai
-   Only for CJK characters
-   ========================= */
-@font-face {
-  font-family: "LXGW WenKai CJK";
-  src: url("{{ '/assets/fonts/LXGWWenKai-Regular.ttf' | relative_url }}") format("truetype");
-  font-weight: 400;
-  font-style: normal;
-
-  /* 只覆盖中文/全角/中日韩标点等区段，让英文继续用主题原字体 */
-  unicode-range:
-    U+2000-206F,  /* General Punctuation */
-    U+3000-303F,  /* CJK Symbols and Punctuation */
-    U+3400-4DBF,  /* CJK Ext A */
-    U+4E00-9FFF,  /* CJK Unified Ideographs */
-    U+F900-FAFF,  /* CJK Compatibility Ideographs */
-    U+FF00-FFEF;  /* Fullwidth Forms */
-}
-
-/* 在 font-family 最前面插入文楷（仅中文生效），英文保持主题默认字体 */
-body {
-  font-family: "LXGW WenKai CJK", inherit;
-}
