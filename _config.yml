@@ -4,7 +4,7 @@ email: waytohill@163.com # email of site's author
 url: https://waytohill.github.io # root address of the site
 baseurl: "" # subpath of the site, e.g. "/blog" (leave it blank "" if you're site shouldn't use a subpath)
 description: > # description of the site (multiple lines allowed)
-  A (nearly) no-CSS, fast, minimalist Jekyll theme.
+  一个博客，记录能记录的任何事，如果不摸的话(
 
 permalink:
 

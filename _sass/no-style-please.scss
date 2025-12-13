@@ -27,9 +27,34 @@ html, body { background: white; }
 
 html { height: 100%; scroll-behavior: smooth; }
 
+/* =========================
+   ADD HERE: LXGW WenKai font-face (CJK only)
+   中文用霞鹜文楷，英文保持 monospace
+   ========================= */
+@font-face {
+  font-family: "LXGW WenKai CJK";
+  src: url("/assets/fonts/LXGWWenKai-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+
+  /* 只覆盖中文/全角/中日韩标点等区段 */
+  unicode-range:
+    U+2000-206F,  /* General Punctuation */
+    U+3000-303F,  /* CJK Symbols and Punctuation */
+    U+3400-4DBF,  /* CJK Ext A */
+    U+4E00-9FFF,  /* CJK Unified Ideographs */
+    U+F900-FAFF,  /* CJK Compatibility Ideographs */
+    U+FF00-FFEF;  /* Fullwidth Forms */
+}
+
 body {
   color: black;
-  font-family: monospace;
+
+  /* CHANGED HERE:
+     原来是 font-family: monospace;
+     现在变成：中文先用文楷（仅中文命中），英文回退 monospace（保持主题原样） */
+  font-family: "LXGW WenKai CJK", monospace;
+
   font-size: 16px;
   line-height: 1.4;
   margin: 0;
